@@ -1,0 +1,27 @@
+{
+  "name": "digital-dynamo-2",
+  "version": "2.0.0",
+  "description": "IUDC - IA",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "appId": "com.digital-dynamo-2.app",
+    "win": {
+      "icon": "./assets/icons/dd-icon.ico"
+    },
+    "mac": {
+      "icon": "./assets/icons/dd-icon.icns"
+    },
+    "linux": {
+      "icon": "./assets/icons/dd-icon.png"
+    }
+  },
+  "author": "S4M-N0V",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^31.3.1"
+  }
+}

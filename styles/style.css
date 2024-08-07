@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&display=swap');
+
+:root {
+    /* Colors */
+    --color-white: #fff;
+    --color-orange: #F8861E;
+    --color-blackground: #040506;
+    --color-light-blackground: #1f1f1f;
+    /* Font From Google Fonts*/
+    --main-font: "IBM Plex Mono", monospace;
+}
+
+/* BODY */
+body {
+    margin: 0;
+    font-family: var(--main-font);
+    font-weight: 400;
+}
+
+/* NAVBAR */
+
+nav {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 1.5em;
+    padding-bottom: 1.5em;
+    border-bottom: 2px solid var(--color-orange);
+}
+
+nav>img {
+    margin-right: 10px;
+}
+
+/* ACTIVE MENU ITEMS */
+.active-page {
+    background-color: var(--color-blackground) !important;
+    box-shadow: 0 0 2px 2px var(--color-orange) !important;
+}
+
+/* SIDE BAR */
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 500px;
+    background-color: var(--color-blackground);
+    border-right: 3px solid #F8861E;
+    color: #fff;
+    padding: 15px;
+    box-sizing: border-box;
+    transition: width 0.3s ease;
+
+}
+
+.sidebar.hidden {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.sidebar .menu-items {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .menu-items .menu-item {
+    display: inline;
+    margin: 10px 0px;
+    background-color: var(--color-light-blackground);
+    padding: 7px 0px;
+    color: #ffffff;
+    font-weight: bold;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 5px 0px var(--color-blackground);
+}
+
+.sidebar .menu-items .menu-item:hover {
+    background-color: var(--color-blackground);
+    box-shadow: 0 0 2px 2px var(--color-orange);
+    cursor: pointer;
+}
+
+.sidebar .menu-items .menu-item a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 20px;
+}
+
+/* APP Contents */
+.content {
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+
+.content-2 {
+    /* width: -webkit-fill-available; */
+    padding: 3em;
+    flex: 1;
+}
+
+/* RESPONSIVE VIDEO */
+.youtube-video {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+}
+
+/* Modulos */
+#navigation-modules .modules-items{
+    list-style: none;
+    padding: 0;
+}
+
+#navigation-modules .modules-items .modules-item {
+    display: block;
+    margin: 10px 0px;
+    background-color: var(--color-light-blackground);
+    color: #ffffff;
+    font-weight: bold;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 5px 0px var(--color-blackground);
+}
+
+#navigation-modules .modules-items .modules-item:hover {
+    background-color: var(--color-blackground);
+    box-shadow: 0 0 2px 2px var(--color-orange);
+    cursor: pointer;
+}
+
+#navigation-modules .modules-items .modules-item a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+}
