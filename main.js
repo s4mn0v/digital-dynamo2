@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu} = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 const path = require('node:path')
 
 const createWindow = () => {
@@ -9,6 +9,7 @@ const createWindow = () => {
         webPreferences: {
             contextIsolation: true,
             nodeIntegration: false,
+            webviewTag: true, // Habilita el uso de <webview>
             preload: path.join(__dirname, 'preload.js')
         }
     })

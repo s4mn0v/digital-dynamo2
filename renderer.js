@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     window.electronAPI.onToggleSidebar(() => {
         const sidebar = document.querySelector('.sidebar');
         sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+        // sidebar.classList.toggle('hidden');
     });
 
     // Load the last page from the local storage or default to 'home'
@@ -66,19 +67,52 @@ async function loadPage(page) {
         const htmlContent = await response.text();
         content.innerHTML = htmlContent;
 
+        // Stay in the current module
+        const content2 = document.getElementById('content-2');
         if (page === 'modules') {
-            const script = document.createElement('script');
-            script.src = '../src/modules/modules.js';
-            script.onload = () => {
-                initializeModules();  // Llamar a la función de inicialización
-            };
-
-            document.body.appendChild(script);
+            // Verificar si el script ya existe
+            if (!document.querySelector('script[src="../src/modules/modules.js"]')) {
+                const script = document.createElement('script');
+                script.src = '../src/modules/modules.js';
+                script.nonce = "RandomNonceHere";  // Agregar el nonce aquí
+                script.onload = () => {
+                    if (typeof initializeModules === 'function') {
+                        initializeModules();
+                        loadCurrentModule();
+                    }
+                };
+                document.body.appendChild(script);
+            } else {
+                // Si el script ya existe, solo llamamos a initializeModules
+                if (typeof initializeModules === 'function') {
+                    initializeModules();
+                    loadCurrentModule();
+                }
+            }
         } else {
-            document.getElementById('content-2').innerHTML = '';
+            // document.getElementById('content-2').innerHTML = '';
+            loadCurrentModule();
         }
     } catch (error) {
         console.error('Error loading page:', error);
         content.innerHTML = '<p>Failed to load content.</p>';
+    }
+}
+
+function loadCurrentModule() {
+    const content2 = document.getElementById('content-2');
+    const currentModule = localStorage.getItem('currentModule') || 'module-1';
+    if (typeof loadModule === 'function') {
+        loadModule(currentModule);
+    } else {
+        fetch(`../src/modules/modules/${currentModule}.html`)
+            .then(response => response.text())
+            .then(html => {
+                content2.innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error loading module:', error);
+                content2.innerHTML = '<p>Failed to load module content.</p>';
+            });
     }
 }

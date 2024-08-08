@@ -15,6 +15,7 @@ body {
     margin: 0;
     font-family: var(--main-font);
     font-weight: 400;
+    line-height: 1.8em;
 }
 
 /* NAVBAR */
@@ -43,6 +44,7 @@ nav>img {
 .container {
     display: flex;
     height: 100vh;
+    flex-wrap: wrap;
 }
 
 .sidebar {
@@ -53,13 +55,10 @@ nav>img {
     padding: 15px;
     box-sizing: border-box;
     transition: width 0.3s ease;
-
 }
 
-.sidebar.hidden {
-    width: 0;
-    padding: 0;
-    overflow: hidden;
+.hidden {
+    display: none;
 }
 
 .sidebar h2 {
@@ -113,7 +112,7 @@ nav>img {
 }
 
 /* Modulos */
-#navigation-modules .modules-items{
+#navigation-modules .modules-items {
     list-style: none;
     padding: 0;
 }
@@ -139,4 +138,43 @@ nav>img {
     text-decoration: none;
     padding: 10px 20px;
     display: block;
+}
+
+
+
+/* CHAT */
+#chat-container {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ccc;
+}
+
+#input-container {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+#input-container input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#input-container button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f1f1f1;
+}
+
+.message.me {
+    background: #c1e1c5;
+    align-self: flex-end;
 }
