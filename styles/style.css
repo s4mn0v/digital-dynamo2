@@ -176,3 +176,13 @@ nav>img {
     background: #c1e1c5;
     align-self: flex-end;
 }
+
+.web-view {
+    width: 100%;
+    height: 500px;
+}
+
+webview {
+    width: 100%;
+    height: 100%;
+}
