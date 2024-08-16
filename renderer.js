@@ -116,3 +116,15 @@ function loadCurrentModule() {
             });
     }
 }
+
+// WEBVIEW
+
+// const webview = document.getElementById('myWebview');
+
+// webview.addEventListener('dom-ready', () => {
+//     console.log('WebView cargado correctamente');
+// });
+
+// function loadUrl(url) {
+//     webview.src = url;
+// }
