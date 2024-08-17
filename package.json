@@ -19,7 +19,20 @@
       "icon": "./assets/icons/dd-icon.png"
     }
   },
-  "author": "S4M-N0V",
+  "authors": [
+    {
+      "name": "S4M-N0V",
+      "git": "https://github.com/s4mn0v"
+    },
+    {
+      "name": "CodeMaster",
+      "git": "https://github.com/codemaster"
+    },
+    {
+      "name": "WebWizard",
+      "git": "https://github.com/webwizard"
+    }
+  ],
   "license": "ISC",
   "devDependencies": {
     "electron": "^31.3.1"

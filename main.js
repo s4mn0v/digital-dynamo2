@@ -10,7 +10,8 @@ const createWindow = () => {
             contextIsolation: true,
             nodeIntegration: false,
             webviewTag: true, // Habilita el uso de <webview>
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, 'preload.js'),
+            // partition: 'persist:wordpress'
         }
     })
 
@@ -22,18 +23,25 @@ const createWindow = () => {
 
 const createMenu = () => {
     const template = [
+        // {
+        //     label: 'Ver',
+        //     submenu: [
+        //         {
+        //             label: 'Alternar Panel Lateral',
+        //             click: () => {
+        //                 const win = BrowserWindow.getFocusedWindow();
+        //                 win.webContents.send('toggle-sidebar');
+        //             }
+        //         },
+                
+        //     ]
+        // },
         {
-            label: 'Ver',
-            submenu: [
-                {
-                    label: 'Alternar Panel Lateral',
-                    click: () => {
-                        const win = BrowserWindow.getFocusedWindow();
-                        win.webContents.send('toggle-sidebar');
-                    }
-                },
-                {role: 'toggleDevTools'}
-            ]
+            label: 'Ocultar panel izdo.',
+            click: () => {
+                const win = BrowserWindow.getFocusedWindow();
+                win.webContents.send('toggle-sidebar');
+            }
         },
         {
             label: 'Recargar',
@@ -42,7 +50,8 @@ const createMenu = () => {
         {
             label: 'Salir',
             role: 'quit'
-        }
+        },
+        // {label: 'Tools', role: 'toggleDevTools'}
     ];
 
     const menu = Menu.buildFromTemplate(template);

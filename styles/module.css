@@ -1,0 +1,61 @@
+/* ----------------------------------*/
+/*|        Author: S4M-N0V          |*/
+/*| Git: https://github.com/s4mn0v  |*/
+/* ----------------------------------*/
+
+.module-navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.module-navigation-buttons button {
+    padding: 10px 15px;
+    background-color: var(--color-orange);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.module-navigation-buttons button:hover {
+    background-color: var(--color-blackground);
+    transition: 0.2s;
+    border-radius: 10px;
+}
+
+.module-navigation-buttons button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Modulos */
+#navigation-modules .modules-items {
+    list-style: none;
+    padding: 0;
+}
+
+#navigation-modules .modules-items .modules-item {
+    display: block;
+    margin: 10px 0px;
+    background-color: var(--color-light-blackground);
+    color: #ffffff;
+    font-weight: bold;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 5px 0px var(--color-blackground);
+}
+
+#navigation-modules .modules-items .modules-item:hover {
+    background-color: var(--color-blackground);
+    box-shadow: 0 0 2px 2px var(--color-orange);
+    cursor: pointer;
+}
+
+#navigation-modules .modules-items .modules-item a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    font-weight: 600;
+}
