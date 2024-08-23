@@ -11,7 +11,7 @@
 
 :root {
     /* Colors */
-    --color-white: #d8eef3;
+    --color-white: #effcff;
     --color-blue: #0a99d1;
     --color-blackground: #0e0e0e;
     --color-light-blackground: #191919;
@@ -66,7 +66,7 @@ nav {
 .content-2 {
     padding: 3em;
     flex: 1;
-    height: 100%;
+    height: 90%;
     overflow-y: auto;
     transition: all 0.3s ease;
 }

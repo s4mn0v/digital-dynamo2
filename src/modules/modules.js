@@ -32,18 +32,70 @@ async function loadModule(moduleId) {
             throw new Error(`HTTP Error! status: ${response.status}`);
         }
         const htmlContent = await response.text();
-        content2.innerHTML = htmlContent;
+        
+        // Crear el checkbox
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `checkbox-${moduleId}`;
+        checkbox.className = 'module-checkbox';
+        
+        const label = document.createElement('label');
+        label.htmlFor = `checkbox-${moduleId}`;
+        label.textContent = 'Módulo completado';
 
-        // Navigation betwenn modules
+        const checkboxContainer = document.createElement('div');
+        checkboxContainer.className = 'checkbox-container';
+        checkboxContainer.appendChild(checkbox);
+        checkboxContainer.appendChild(label);
+
+        // Insertar el checkbox al principio del content-2
+        content2.innerHTML = '';
+        content2.appendChild(checkboxContainer);
+        
+        // Agregar el contenido del módulo
+        const moduleContent = document.createElement('div');
+        moduleContent.innerHTML = htmlContent;
+        content2.appendChild(moduleContent);
+
+        // Cargar el estado del checkbox
+        const isCompleted = localStorage.getItem(`module-${moduleId}-completed`) === 'true';
+        checkbox.checked = isCompleted;
+
+        // Guardar el estado del checkbox cuando cambie
+        checkbox.addEventListener('change', (e) => {
+            localStorage.setItem(`module-${moduleId}-completed`, e.target.checked);
+            updateProgressBar();
+        });
+
+        // Navigation between modules
         const navigationButtons = createNavigationButtons(moduleId);
         content2.appendChild(navigationButtons);
 
+        updateProgressBar();
     } catch (error) {
         console.error('Error loading module:', error);
         content2.innerHTML = '<p>Failed to load module.</p>';
     }
 }
 
+function updateProgressBar() {
+    const totalModules = document.querySelectorAll('#navigation-modules a').length;
+    const completedModules = Array.from(document.querySelectorAll('#navigation-modules a'))
+        .filter(link => localStorage.getItem(`module-${link.getAttribute('data-module')}-completed`) === 'true')
+        .length;
+    
+    const progressPercentage = Math.round((completedModules / totalModules) * 100);
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = `${progressPercentage}%`;
+    
+    // Añadir el texto del porcentaje dentro de la barra de progreso
+    progressBar.textContent = `${progressPercentage}%`;
+    
+    // Ajustar el estilo para que el texto sea visible
+    progressBar.style.color = progressPercentage > 50 ? 'white' : 'black';
+    progressBar.style.textAlign = 'center';
+    progressBar.style.lineHeight = '20px'; // Debe coincidir con la altura de la barra
+}
 
 // Modules navigation between buttons
 
