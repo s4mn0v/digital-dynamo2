@@ -6,24 +6,58 @@ function initializeModules() {
             const moduleId = e.target.closest('a').getAttribute('data-module');
             loadModule(moduleId);
         });
+        
+        // Añadir el símbolo de verificación a cada enlace de módulo
+        const checkSymbol = document.createElement('span');
+        checkSymbol.textContent = ' ✔';
+        checkSymbol.style.color = 'green';
+        checkSymbol.style.display = 'none';
+        checkSymbol.className = 'module-check';
+        link.appendChild(checkSymbol);
+        
+        // Verificar si el módulo está completado y mostrar el símbolo si es así
+        const moduleId = link.getAttribute('data-module');
+        const isCompleted = localStorage.getItem(`module-${moduleId}-completed`) === 'true';
+        if (isCompleted) {
+            checkSymbol.style.display = 'inline';
+        }
     });
 
     const lastModuleVisited = localStorage.getItem('currentModule') || 'module-1';
     loadModule(lastModuleVisited);
+    updateProgressBar();
 }
 
 async function loadModule(moduleId) {
+    // Check if we're on the modules page
+    const content2 = document.getElementById('content-2');
+    if (!content2) {
+        console.log('Not on modules page, skipping module load');
+        return;
+    }
+
     localStorage.setItem('currentModule', moduleId);
 
     const moduleLinks = document.querySelectorAll('#navigation-modules a');
+    let targetModuleLink = null;
+
     moduleLinks.forEach(link => {
         link.parentElement.classList.remove('active-page');
         if (link.getAttribute('data-module') === moduleId) {
             link.parentElement.classList.add('active-page');
+            targetModuleLink = link;
         }
     });
 
-    const content2 = document.getElementById('content-2');
+    // If the requested module is not found, default to the first module
+    if (!targetModuleLink && moduleLinks.length > 0) {
+        console.warn(`Module ${moduleId} not found. Loading the first module instead.`);
+        targetModuleLink = moduleLinks[0];
+        moduleId = targetModuleLink.getAttribute('data-module');
+        localStorage.setItem('currentModule', moduleId);
+        targetModuleLink.parentElement.classList.add('active-page');
+    }
+
     const url = `../src/modules/modules/${moduleId}.html`;
 
     try {
@@ -33,7 +67,7 @@ async function loadModule(moduleId) {
         }
         const htmlContent = await response.text();
         
-        // Crear el checkbox
+        // Create the checkbox
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = `checkbox-${moduleId}`;
@@ -48,23 +82,37 @@ async function loadModule(moduleId) {
         checkboxContainer.appendChild(checkbox);
         checkboxContainer.appendChild(label);
 
-        // Insertar el checkbox al principio del content-2
+        // Insert the checkbox at the beginning of content-2
         content2.innerHTML = '';
         content2.appendChild(checkboxContainer);
         
-        // Agregar el contenido del módulo
+        // Add the module content
         const moduleContent = document.createElement('div');
         moduleContent.innerHTML = htmlContent;
         content2.appendChild(moduleContent);
 
-        // Cargar el estado del checkbox
+        // Load the checkbox state
         const isCompleted = localStorage.getItem(`module-${moduleId}-completed`) === 'true';
         checkbox.checked = isCompleted;
 
-        // Guardar el estado del checkbox cuando cambie
+        // Update the check symbol in the navigation list
+        if (targetModuleLink) {
+            const checkSymbol = targetModuleLink.querySelector('.module-check');
+            if (checkSymbol) {
+                checkSymbol.style.display = isCompleted ? 'inline' : 'none';
+            }
+        }
+
+        // Save the checkbox state when it changes
         checkbox.addEventListener('change', (e) => {
             localStorage.setItem(`module-${moduleId}-completed`, e.target.checked);
             updateProgressBar();
+            if (targetModuleLink) {
+                const checkSymbol = targetModuleLink.querySelector('.module-check');
+                if (checkSymbol) {
+                    checkSymbol.style.display = e.target.checked ? 'inline' : 'none';
+                }
+            }
         });
 
         // Navigation between modules
@@ -74,27 +122,31 @@ async function loadModule(moduleId) {
         updateProgressBar();
     } catch (error) {
         console.error('Error loading module:', error);
-        content2.innerHTML = '<p>Failed to load module.</p>';
+        if (content2) {
+            content2.innerHTML = '<p>Failed to load module.</p>';
+        }
     }
 }
 
 function updateProgressBar() {
+    const progressBar = document.getElementById('progress-bar');
+    if (!progressBar) {
+        console.log('Progress bar not found, skipping update');
+        return;
+    }
+
     const totalModules = document.querySelectorAll('#navigation-modules a').length;
     const completedModules = Array.from(document.querySelectorAll('#navigation-modules a'))
         .filter(link => localStorage.getItem(`module-${link.getAttribute('data-module')}-completed`) === 'true')
         .length;
     
     const progressPercentage = Math.round((completedModules / totalModules) * 100);
-    const progressBar = document.getElementById('progress-bar');
     progressBar.style.width = `${progressPercentage}%`;
     
-    // Añadir el texto del porcentaje dentro de la barra de progreso
     progressBar.textContent = `${progressPercentage}%`;
-    
-    // Ajustar el estilo para que el texto sea visible
     progressBar.style.color = progressPercentage > 50 ? 'white' : 'black';
     progressBar.style.textAlign = 'center';
-    progressBar.style.lineHeight = '20px'; // Debe coincidir con la altura de la barra
+    progressBar.style.lineHeight = '20px';
 }
 
 // Modules navigation between buttons

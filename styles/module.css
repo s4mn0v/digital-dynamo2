@@ -80,6 +80,7 @@
     transition: width 0.3s;
     font-weight: bold;
     font-size: 14px;
+    padding-left: 10px;
 }
 
 .checkbox-container {
@@ -88,7 +89,7 @@
     margin-bottom: 20px;
     background-color: var(--color-blue);
     border-radius: 50px;
-    width: 23%;
+    width: 25%;
 }
 
 .module-checkbox {
