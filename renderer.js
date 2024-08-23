@@ -1,3 +1,16 @@
+// Title bar functions
+document.getElementById('minimize-btn').addEventListener('click', () => {
+    window.electronAPI.minimize();
+});
+
+document.getElementById('maximize-btn').addEventListener('click', () => {
+    window.electronAPI.maximize();
+});
+
+document.getElementById('close-btn').addEventListener('click', () => {
+    window.electronAPI.close();
+});
+
 document.addEventListener('DOMContentLoaded', (event) => {
     // Add event listeners to the menu items
     document.getElementById('home-link').addEventListener('click', (e) => {
@@ -8,21 +21,38 @@ document.addEventListener('DOMContentLoaded', (event) => {
         e.preventDefault(); // Prevent default anchor behavior
         loadPage('modules');
     });
-    document.getElementById('chat-link').addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default anchor behavior
-        loadPage('chat');
-    });
+
+    // Add event listener for toggle-sidebar button
+    const hideSidebarBtn = document.getElementById('hide-sidebar-btn');
+    const showSidebarBtn = document.getElementById('show-sidebar-btn');
+    const sidebar = document.querySelector('.sidebar');
+    const content2 = document.getElementById('content-2');
+
+    if (hideSidebarBtn) {
+        hideSidebarBtn.addEventListener('click', () => {
+            window.electronAPI.toggleSidebar();
+        });
+    }
+
+    if (showSidebarBtn) {
+        showSidebarBtn.addEventListener('click', () => {
+            window.electronAPI.toggleSidebar();
+        });
+    }
 
     window.electronAPI.onToggleSidebar(() => {
-        const sidebar = document.querySelector('.sidebar');
-        sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
-        // sidebar.classList.toggle('hidden');
+        const isHidden = sidebar.style.display === 'none';
+        
+        sidebar.style.display = isHidden ? 'block' : 'none';
+        showSidebarBtn.style.display = isHidden ? 'none' : 'block';
+        
+        // Adjust the content-2 width
+        content2.style.width = isHidden ? '100%' : 'calc(100% - 200px)'; // Adjust 200px to match your sidebar width
     });
 
     // Load the last page from the local storage or default to 'home'
     const lastVisitedPage = localStorage.getItem('currentPage') || 'home';
     loadPage(lastVisitedPage);
-    // loadPage('home');
 });
 
 async function loadPage(page) {
@@ -90,7 +120,6 @@ async function loadPage(page) {
                 }
             }
         } else {
-            // document.getElementById('content-2').innerHTML = '';
             loadCurrentModule();
         }
     } catch (error) {

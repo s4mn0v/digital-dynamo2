@@ -1,15 +1,19 @@
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow, ipcMain, Menu } = require('electron')
 const path = require('node:path')
 
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        frame: false,
+        titleBarStyle: 'hidden',
         icon: path.join(__dirname, './assets/icons/dd-icon.png'),
         webPreferences: {
             contextIsolation: true,
             nodeIntegration: false,
+            enableRemoteModule: false,
             webviewTag: true, // Habilita el uso de <webview>
+            devTools: true,
             preload: path.join(__dirname, 'preload.js'),
             // partition: 'persist:wordpress'
         }
@@ -19,23 +23,32 @@ const createWindow = () => {
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
+
+    // IPC event handlers
+    ipcMain.handle('minimize', () => {
+        mainWindow.minimize();
+    });
+
+    ipcMain.handle('maximize', () => {
+        if (mainWindow.isMaximized()) {
+            mainWindow.unmaximize();
+        } else {
+            mainWindow.maximize();
+        }
+    });
+
+    ipcMain.handle('close', () => {
+        mainWindow.close();
+    });
+
+    ipcMain.handle('toggle-sidebar', () => {
+        const win = BrowserWindow.getFocusedWindow();
+        win.webContents.send('toggle-sidebar');
+    });
 }
 
 const createMenu = () => {
     const template = [
-        // {
-        //     label: 'Ver',
-        //     submenu: [
-        //         {
-        //             label: 'Alternar Panel Lateral',
-        //             click: () => {
-        //                 const win = BrowserWindow.getFocusedWindow();
-        //                 win.webContents.send('toggle-sidebar');
-        //             }
-        //         },
-                
-        //     ]
-        // },
         {
             label: 'Ocultar panel izdo.',
             click: () => {
