@@ -1,3 +1,16 @@
+ // 0------------------------------------------0
+// |  Authors:                                |
+// |                                          |
+// |  1. S4M-N0V                              |
+// |     Git: https://github.com/s4mn0v       |
+// |                                          |
+// |  2. JuanesB2f                            |
+// |     Git: https://github.com/JuanesB2f    |
+// |                                          |
+// |  3. DnovoaB                              |
+// |     Git: https://github.com/DnovoaB      |
+// 0------------------------------------------0
+
 const { app, BrowserWindow, ipcMain, Menu, session } = require('electron')
 const path = require('node:path')
 
@@ -13,7 +26,7 @@ const createWindow = () => {
             nodeIntegration: false,
             enableRemoteModule: false,
             webviewTag: true, // Habilita el uso de <webview>
-            devTools: true,
+            // devTools: true,
             preload: path.join(__dirname, 'preload.js'),
             // partition: 'persist:wordpress'
         }
@@ -38,9 +51,6 @@ const createWindow = () => {
     });
 
     mainWindow.loadFile('./public/index.html')
-
-    // Open the DevTools.
-    mainWindow.webContents.openDevTools()
 
     // IPC event handlers
     ipcMain.handle('minimize', () => {
