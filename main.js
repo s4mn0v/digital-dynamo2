@@ -1,3 +1,16 @@
+ // 0------------------------------------------0
+// |  Authors:                                |
+// |                                          |
+// |  1. S4M-N0V                              |
+// |     Git: https://github.com/s4mn0v       |
+// |                                          |
+// |  2. JuanesB2f                            |
+// |     Git: https://github.com/JuanesB2f    |
+// |                                          |
+// |  3. DnovoaB                              |
+// |     Git: https://github.com/DnovoaB      |
+// 0------------------------------------------0
+
 const { app, BrowserWindow, ipcMain, Menu, session } = require('electron')
 const path = require('node:path')
 
