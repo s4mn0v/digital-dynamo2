@@ -121,20 +121,19 @@ function loadCurrentModule() {
 
 function animateAvatar() {
     const avatarImage = document.getElementById('avatar-image');
-    avatarImage.style.transition = 'transform 0.5s';
-    avatarImage.style.transform = 'scale(1.1)';
+    avatarImage.style.animation = 'pulse 0.5s';
     setTimeout(() => {
-        avatarImage.style.transform = 'scale(1)';
+        avatarImage.style.animation = '';
     }, 500);
 }
 
 function processUserInput(input) {
     console.log('Procesando entrada del usuario:', input);
-    animateAvatar();
     addMessage(input, 'user-message');
     
+    const response = getAvatarResponse(input);
     setTimeout(() => {
-        const response = "Gracias por tu pregunta. Estoy procesando la información.";
+        animateAvatar();
         addMessage(response, 'avatar-message');
     }, 1000);
 }
@@ -148,7 +147,22 @@ function addMessage(text, className) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-async function initializeAvatar() {
+function getAvatarResponse(input) {
+    const lowercaseInput = input.toLowerCase();
+    if (lowercaseInput.includes('hola') || lowercaseInput.includes('saludar')) {
+        return "¡Hola! ¿En qué puedo ayudarte hoy?";
+    } else if (lowercaseInput.includes('módulo') || lowercaseInput.includes('modulo')) {
+        return "Los módulos son secciones de aprendizaje en nuestra plataforma. ¿Sobre qué módulo específico quieres saber más?";
+    } else if (lowercaseInput.includes('marketing')) {
+        return "El marketing digital es crucial para promocionar tu negocio en línea. ¿Quieres saber más sobre estrategias específicas?";
+    } else if (lowercaseInput.includes('seo')) {
+        return "SEO significa Optimización para Motores de Búsqueda. Es importante para mejorar la visibilidad de tu sitio web. ¿Quieres aprender técnicas de SEO?";
+    } else {
+        return "Gracias por tu pregunta. No estoy seguro de cómo responder a eso. ¿Podrías reformular tu pregunta o preguntar sobre los módulos, marketing digital o SEO?";
+    }
+}
+
+function initializeAvatar() {
     const avatarContainer = document.getElementById('avatar-container');
     const avatarChat = document.getElementById('avatar-chat');
     const avatarImage = document.getElementById('avatar-image');
@@ -156,8 +170,7 @@ async function initializeAvatar() {
     const userInput = document.getElementById('user-input');
 
     if (avatarImage && avatarChat && sendButton && userInput) {
-        // Usar el estilo Notionists de Dicebear
-        const seed = 'Rocky'; // Puedes cambiar esto por el nombre del usuario o un identificador único
+        const seed = 'Rocky';
         avatarImage.src = `https://api.dicebear.com/6.x/notionists/svg?seed=${seed}`;
 
         avatarImage.addEventListener('click', () => {
@@ -177,41 +190,54 @@ async function initializeAvatar() {
                 sendButton.click();
             }
         });
+
+        // Agregar funcionalidad de arrastrar
+        let isDragging = false;
+        let startX, startY;
+
+        avatarContainer.addEventListener('mousedown', startDragging);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDragging);
+
+        function startDragging(e) {
+            isDragging = true;
+            startX = e.clientX - avatarContainer.offsetLeft;
+            startY = e.clientY - avatarContainer.offsetTop;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            
+            let newX = e.clientX - startX;
+            let newY = e.clientY - startY;
+
+            // Limitar el movimiento dentro de la ventana
+            newX = Math.max(0, Math.min(newX, window.innerWidth - avatarContainer.offsetWidth));
+            newY = Math.max(0, Math.min(newY, window.innerHeight - avatarContainer.offsetHeight));
+
+            avatarContainer.style.left = newX + 'px';
+            avatarContainer.style.top = newY + 'px';
+        }
+
+        function stopDragging() {
+            isDragging = false;
+        }
+
+        // Cargar la posición guardada del avatar
+        const savedPosition = JSON.parse(localStorage.getItem('avatarPosition'));
+        if (savedPosition) {
+            avatarContainer.style.left = savedPosition.left;
+            avatarContainer.style.top = savedPosition.top;
+        }
+
+        // Guardar la posición del avatar antes de cerrar la ventana
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('avatarPosition', JSON.stringify({
+                left: avatarContainer.style.left,
+                top: avatarContainer.style.top
+            }));
+        });
     } else {
         console.error('Elementos del avatar no encontrados');
-    }
-}
-
-function animateAvatar() {
-    const avatarImage = document.getElementById('avatar-image');
-    avatarImage.style.animation = 'pulse 0.5s';
-    setTimeout(() => {
-        avatarImage.style.animation = '';
-    }, 500);
-}
-
-function processUserInput(input) {
-    console.log('Procesando entrada del usuario:', input);
-    addMessage(input, 'user-message');
-    
-    const response = getAvatarResponse(input);
-    setTimeout(() => {
-        animateAvatar();
-        addMessage(response, 'avatar-message');
-    }, 1000);
-}
-
-function getAvatarResponse(input) {
-    const lowercaseInput = input.toLowerCase();
-    if (lowercaseInput.includes('hola') || lowercaseInput.includes('saludar')) {
-        return "¡Hola! ¿En qué puedo ayudarte hoy?";
-    } else if (lowercaseInput.includes('módulo') || lowercaseInput.includes('modulo')) {
-        return "Los módulos son secciones de aprendizaje en nuestra plataforma. ¿Sobre qué módulo específico quieres saber más?";
-    } else if (lowercaseInput.includes('marketing')) {
-        return "El marketing digital es crucial para promocionar tu negocio en línea. ¿Quieres saber más sobre estrategias específicas?";
-    } else if (lowercaseInput.includes('seo')) {
-        return "SEO significa Optimización para Motores de Búsqueda. Es importante para mejorar la visibilidad de tu sitio web. ¿Quieres aprender técnicas de SEO?";
-    } else {
-        return "Gracias por tu pregunta. No estoy seguro de cómo responder a eso. ¿Podrías reformular tu pregunta o preguntar sobre los módulos, marketing digital o SEO?";
     }
 }
