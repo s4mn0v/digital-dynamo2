@@ -507,7 +507,6 @@ const knowledgeBase = {
     influencers: "El marketing con influencers utiliza personas influyentes en redes sociales para promocionar productos o servicios a sus seguidores. Es una forma efectiva de llegar a nuevas audiencias.",
     automatizacion: "La automatización del marketing permite programar y optimizar campañas de marketing digital utilizando software, lo que ahorra tiempo y mejora la eficiencia. Incluye herramientas para el email marketing, la segmentación y más.",
     ppc: "El PPC (Pago por Clic) es un modelo de publicidad digital donde los anunciantes pagan cada vez que un usuario hace clic en su anuncio. Es común en plataformas como Google Ads y Facebook Ads.",
-    seo: "El SEO (Search Engine Optimization) es fundamental en el marketing digital para mejorar la visibilidad de un sitio web en los motores de búsqueda y atraer tráfico orgánico de calidad.",
     roi: "El ROI (Retorno de la Inversión) es una métrica clave que mide la rentabilidad de las campañas de marketing. Se calcula dividiendo los beneficios obtenidos por los costos de la inversión.",
     ux: "La experiencia del usuario (UX) es esencial en el marketing digital, ya que un sitio fácil de usar y atractivo aumenta la satisfacción del usuario y la probabilidad de conversión."
   },
