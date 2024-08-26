@@ -174,7 +174,7 @@
     padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
     overflow: hidden;
     margin: 0 auto;  /* Para centrar el contenedor si es necesario */
-}
+    }
   
   .video-container iframe {
     position: absolute;
@@ -184,4 +184,7 @@
     height: 100%;
     border: 2px solid #000;
     border-radius: 10px;
+    /* Estilos para el Quiz */
+
 }
+
