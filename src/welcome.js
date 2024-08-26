@@ -170,7 +170,7 @@ function setFixedVoice() {
 function createFox2D() {
   const foxImage = new Image();
   foxImage.src =
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-R1Hf0gJntkfd2O6z9O1PBPEVOMQCSC.png";
+    "../assets/fox.gif";
   foxImage.onload = function () {
     const avatarContainer = document.getElementById("avatar-container");
     const canvas = document.createElement("canvas");
