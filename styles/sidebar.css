@@ -24,6 +24,14 @@
 .right-icon {
     margin-left: auto;
     cursor: pointer;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.left-icon {
+    
+    background-color: transparent !important;
+    border: none !important;
 }
 
 #show-sidebar-btn {
