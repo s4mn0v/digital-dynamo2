@@ -13,7 +13,7 @@ const createWindow = () => {
             nodeIntegration: false,
             enableRemoteModule: false,
             webviewTag: true, // Habilita el uso de <webview>
-            devTools: true,
+            // devTools: true,
             preload: path.join(__dirname, 'preload.js'),
             // partition: 'persist:wordpress'
         }
@@ -38,9 +38,6 @@ const createWindow = () => {
     });
 
     mainWindow.loadFile('./public/index.html')
-
-    // Open the DevTools.
-    mainWindow.webContents.openDevTools()
 
     // IPC event handlers
     ipcMain.handle('minimize', () => {
