@@ -1,5 +1,5 @@
-let scene, camera, renderer, gear;
-let welcomeScreen, welcomeMessage;
+let scene, camera, renderer, avatar;
+let welcomeScreen, welcomeMessage, skipButton;
 const messages = [
     "¡Bienvenido a Digital Dynamo!",
     "Soy tu guía virtual para aprender sobre WordPress y marketing digital.",
@@ -39,59 +39,58 @@ function init() {
     welcomeMessage.style.position = 'relative';
     welcomeMessage.style.zIndex = '10';
 
+    // Crear y añadir el botón de omitir
+    skipButton = document.createElement('button');
+    skipButton.textContent = 'Omitir';
+    skipButton.style.position = 'absolute';
+    skipButton.style.top = '10px';
+    skipButton.style.right = '10px';
+    skipButton.style.padding = '70px 16px';
+    skipButton.style.backgroundColor = 'rgba(76, 175, 80, 0.8)';
+    skipButton.style.color = 'white';
+    skipButton.style.border = 'none';
+    skipButton.style.borderRadius = '20px';
+    skipButton.style.cursor = 'pointer';
+    skipButton.style.zIndex = '1000';
+    skipButton.style.fontFamily = 'Arial, sans-serif';
+    skipButton.style.fontSize = '14px';
+    skipButton.style.fontWeight = 'bold';
+    skipButton.style.textTransform = 'uppercase';
+    skipButton.style.letterSpacing = '1px';
+    skipButton.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.2)';
+    skipButton.style.transition = 'all 0.3s ease';
+    skipButton.addEventListener('mouseover', function() {
+        this.style.backgroundColor = 'rgba(76, 175, 80, 1)';
+        this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.3)';
+        this.style.transform = 'translateY(-2px)';
+    });
+    skipButton.addEventListener('mouseout', function() {
+        this.style.backgroundColor = 'rgba(76, 175, 80, 0.8)';
+        this.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.2)';
+        this.style.transform = 'translateY(0)';
+    });
+    skipButton.addEventListener('click', skipWelcome);
+    welcomeScreen.appendChild(skipButton);
+
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer = new THREE.WebGLRenderer({ 
+        antialias: true, 
+        alpha: true,
+        powerPreference: 'high-performance'
+    });
     renderer.setSize(window.innerWidth, window.innerHeight * 0.4);
+    renderer.setPixelRatio(window.devicePixelRatio);
     document.getElementById('avatar-container').appendChild(renderer.domElement);
 
-    // Crear un engranaje
-    const gearGeometry = new THREE.Shape();
-    const outerRadius = 1;
-    const innerRadius = 0.8;
-    const teeth = 20;
-    const toothDepth = 0.2;
+    // Crear una figura más interesante (un toro)
+    const geometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
+    const material = new THREE.MeshPhongMaterial({ color: 0x00ff00, shininess: 100 });
+    avatar = new THREE.Mesh(geometry, material);
+    scene.add(avatar);
 
-    gearGeometry.moveTo(outerRadius, 0);
-    for (let i = 0; i < teeth; i++) {
-        const angle = (i / teeth) * Math.PI * 2;
-        const nextAngle = ((i + 1) / teeth) * Math.PI * 2;
-        
-        gearGeometry.lineTo(
-            Math.cos(angle) * outerRadius,
-            Math.sin(angle) * outerRadius
-        );
-        
-        gearGeometry.lineTo(
-            Math.cos(angle + 0.1) * (outerRadius + toothDepth),
-            Math.sin(angle + 0.1) * (outerRadius + toothDepth)
-        );
-        
-        gearGeometry.lineTo(
-            Math.cos(nextAngle - 0.1) * (outerRadius + toothDepth),
-            Math.sin(nextAngle - 0.1) * (outerRadius + toothDepth)
-        );
-        
-        gearGeometry.lineTo(
-            Math.cos(nextAngle) * outerRadius,
-            Math.sin(nextAngle) * outerRadius
-        );
-    }
-
-    const extrudeSettings = {
-        steps: 2,
-        depth: 0.2,
-        bevelEnabled: false
-    };
-
-    const gearExtrudeGeometry = new THREE.ExtrudeGeometry(gearGeometry, extrudeSettings);
-    const gearMaterial = new THREE.MeshPhongMaterial({ color: 0x1E90FF, shininess: 100 });
-    gear = new THREE.Mesh(gearExtrudeGeometry, gearMaterial);
-
-    scene.add(gear);
-
-    // Añadir luces para mejorar la apariencia
+    // Añadir más luces para mejorar la apariencia
     const light1 = new THREE.PointLight(0xffffff, 1, 100);
     light1.position.set(5, 5, 5);
     scene.add(light1);
@@ -111,7 +110,8 @@ function init() {
 
 function animate() {
     requestAnimationFrame(animate);
-    gear.rotation.z += 0.01;
+    avatar.rotation.x += 0.01;
+    avatar.rotation.y += 0.01;
     renderer.render(scene, camera);
 }
 
@@ -129,15 +129,23 @@ function showWelcomeMessages() {
             }, 500);
         } else {
             setTimeout(() => {
-                welcomeScreen.style.opacity = 0;
-                setTimeout(() => {
-                    welcomeScreen.style.display = 'none';
-                }, 1000);
+                hideWelcomeScreen();
             }, 1000);
         }
     }
 
     displayNextMessage();
+}
+
+function skipWelcome() {
+    hideWelcomeScreen();
+}
+
+function hideWelcomeScreen() {
+    welcomeScreen.style.opacity = 0;
+    setTimeout(() => {
+        welcomeScreen.style.display = 'none';
+    }, 1000);
 }
 
 function onWindowResize() {
