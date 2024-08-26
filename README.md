@@ -4,19 +4,16 @@ Este programa está diseñado para enseñarte a crear páginas web y aplicar est
 
 ---
 
-## Módulo #1: Manejo de la Aplicación
-
-¡Bienvenid@ a Digital Dynamo! Este módulo te guiará a través de las funcionalidades básicas de la plataforma para que comiences tu viaje en la creación de páginas web y marketing digital.
+## Manejo de la Aplicación
 
 ### Navegación por la Aplicación
 
-Tu aplicación está organizada en dos paneles principales que te ayudarán a moverte fácilmente entre las diferentes áreas y herramientas.
+La aplicación está organizada en dos paneles principales que te ayudarán a moverte fácilmente entre las diferentes áreas y herramientas.
 
 ### Panel Izquierdo
 
 - **Inicio**: Aquí encontrarás una introducción general a la aplicación y un resumen de sus funcionalidades.
 - **Módulos de Aprendizaje**: Podrás acceder a los diferentes módulos sobre creación de sitios web y marketing digital.
-- **(El Chat de Soporte ya no está disponible)**
 
 ### Panel Derecho
 
@@ -58,3 +55,19 @@ Nuestro visor web integrado te permitirá ver cómo se desarrolla tu sitio web e
 - Módulo #20:
 
 ---
+
+flowchart TD
+    A[Iniciar Sesión] --> B[Ver Menú Principal]
+    B --> C[Seleccionar Módulo de Aprendizaje]
+    C --> D[Explorar Lecciones y Tutoriales]
+    D --> E[Realizar Actividades y Tareas]
+    E --> F{¿Necesitas Ayuda?}
+    F -->|Sí| G[Ver Recursos Adicionales]
+    F -->|No| H[Seguir con el Siguiente Módulo]
+    G --> H[Seguir con el Siguiente Módulo]
+    H --> I[Completar Módulo]
+    I --> J{¿Todos los Módulos Completados?}
+    J -->|No| C
+    J -->|Sí| K[Felicidades! Has Completado el Curso]
+    
+    B --> L[Ocultar Panel Izquierdo] --> B
