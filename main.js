@@ -46,7 +46,7 @@ const createWindow = () => {
                 ...details.responseHeaders,
                 'Content-Security-Policy': [
                     "default-src 'self'; " +
-                    "script-src 'self' 'unsafe-inline'; " +
+                    "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; " +
                     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
                     "font-src https://fonts.gstatic.com; " +
                     "frame-src 'self' https://www.youtube.com; " +
