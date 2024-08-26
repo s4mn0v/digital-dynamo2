@@ -45,18 +45,19 @@ const createWindow = () => {
             responseHeaders: {
                 ...details.responseHeaders,
                 'Content-Security-Policy': [
-                    "default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; " +
-                    "script-src * 'unsafe-inline' 'unsafe-eval'; " +
-                    "style-src * 'unsafe-inline'; " +
-                    "font-src * data:; " +
-                    "frame-src *; " +
-                    "img-src * data: blob:; " +
-                    "connect-src *;"
+                    "default-src 'self'; " +
+                    "script-src 'self' 'unsafe-inline'; " +
+                    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+                    "font-src https://fonts.gstatic.com; " +
+                    "frame-src 'self' https://www.youtube.com; " +
+                    "img-src 'self' https://avatars.dicebear.com https://api.dicebear.com; " +
+                    "connect-src 'self' https://api-inference.huggingface.co;"
                 ]
             }
         });
     });
 
+    // Cargar la página principal directamente
     mainWindow.loadFile('./public/index.html')
 
     // IPC event handlers
@@ -77,8 +78,7 @@ const createWindow = () => {
     });
 
     ipcMain.handle('toggle-sidebar', () => {
-        const win = BrowserWindow.getFocusedWindow();
-        win.webContents.send('toggle-sidebar');
+        mainWindow.webContents.send('toggle-sidebar');
     });
 }
 
@@ -108,7 +108,6 @@ const createMenu = () => {
 
 app.whenReady().then(() => {
     createWindow()
-    // Custom Menu
     createMenu()
 
     app.on('activate', () => {
