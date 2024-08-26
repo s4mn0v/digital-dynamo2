@@ -311,9 +311,6 @@ async function loadPage(page) {
     case "modules":
       url = "../src/modules/modules.html";
       break;
-    case "chat":
-      url = "../src/chat/chat.html";
-      break;
     default:
       url = "../src/home.html";
   }
