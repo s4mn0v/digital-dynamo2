@@ -5,57 +5,99 @@
     |  1. S4M-N0V                              |
     |     Git: https://github.com/s4mn0v       |
     |                                          |
-    |  2. JuanesB2f                           |
-    |     Git: https://github.com/JuanesB2f   |
+    |  2. JuanesB2f                            |
+    |     Git: https://github.com/JuanesB2f    |
     |                                          |
-    |  3. WebWizard                            |
-    |     Git: https://github.com/webwizard    |
+    |  3. DnovoaB                              |
+    |     Git: https://github.com/DnovoaB      |
     0------------------------------------------0
 -->
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' http: https: ws: wss: data: blob: 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; object-src 'self';">
+<html lang="es">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
     <title>Digital Dynamo</title>
-    <link rel="stylesheet" href="../styles/style.css">
-</head>
+    <link rel="stylesheet" href="../styles/style.css" />
+  </head>
 
-<body>
+  <body>
     <!-- WINDOW CONTROLS -->
     <div id="title-bar">
-        <span>Digital Dynamo 2</span>
+      <span>Digital Dynamo 2</span>
 
-        <div>
-            <button id="minimize-btn"><img src="../assets/navbar/minimize.png" alt="" class="win-controls"></button>
-            <button id="maximize-btn"><img src="../assets/navbar/resize.png" alt="" class="win-controls"></button>
-            <button id="close-btn"><img src="../assets/navbar/close.png" alt="" class="win-controls"></button>
-        </div>
+      <div>
+        <button id="minimize-btn" aria-label="Minimizar">
+          <img
+            src="../assets/navbar/minimize.png"
+            alt=""
+            class="win-controls"
+          />
+        </button>
+        <button id="maximize-btn" aria-label="Maximizar/Restaurar">
+          <img src="../assets/navbar/resize.png" alt="" class="win-controls" />
+        </button>
+        <button id="close-btn" aria-label="Cerrar">
+          <img src="../assets/navbar/close.png" alt="" class="win-controls" />
+        </button>
+      </div>
     </div>
     <!-- CONTENT -->
     <div class="container">
-        <div class="sidebar">
-            <nav id="navigation">
-                <img src="../assets/icons/digital-dynamo-t.png" alt="" height="80px" class="left-icon">
-                <ul class="menu-items">
-                    <li class="menu-item"><a href="#" id="home-link">Inicio</a></li>
-                    <li class="menu-item"><a href="#" id="modules-link">Modulos</a></li>
-                </ul>
-                <img src="../assets/sidebar/hide.png" alt="" height="25px" id="hide-sidebar-btn" class="right-icon"
-                    title="Ocultar Panel">
-            </nav>
+      <div class="sidebar">
+        <nav id="navigation">
+          <img
+            src="../assets/icons/digital-dynamo-t.png"
+            alt="Logo Digital Dynamo"
+            height="80"
+            class="left-icon"
+          />
+          <ul class="menu-items">
+            <li class="menu-item"><a href="#" id="home-link">Inicio</a></li>
+            <li class="menu-item"><a href="#" id="modules-link">Módulos</a></li>
+          </ul>
+          <button
+            id="hide-sidebar-btn"
+            class="right-icon"
+            aria-label="Ocultar Panel"
+          >
+            <img
+              src="../assets/sidebar/hide.png"
+              alt=""
+              height="25"
+              title="Ocultar Panel"
+            />
+          </button>
+        </nav>
 
-            <div class="content" id="content">
-            </div>
-        </div>
-        <img src="../assets/sidebar/show.png" alt="" height="25px" id="show-sidebar-btn" style="display: none;"
-            title="Mostrar Panel">
-        <div class="content-2" id="content-2">
-        </div>
+        <div class="content" id="content"></div>
+      </div>
+      <button
+        id="show-sidebar-btn"
+        style="display: none"
+        aria-label="Mostrar Panel"
+      >
+        <img
+          src="../assets/sidebar/show.png"
+          alt=""
+          height="25"
+          title="Mostrar Panel"
+        />
+      </button>
+      <div class="content-2" id="content-2"></div>
     </div>
-    <script nonce="RandomNonceHere" src="../renderer.js"></script>
-</body>
 
+    <div id="avatar-container" class="avatar-container">
+      <div id="avatar-chat" class="avatar-chat" style="display: none;">
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="chat-input">
+          <input type="text" id="user-input" placeholder="Escribe tu mensaje...">
+          <button id="send-button">Enviar</button>
+        </div>
+      </div>
+      <img id="avatar-image" alt="Avatar" class="avatar-image">
+    </div>
+
+    <script src="../renderer.js"></script>
+  </body>
 </html>

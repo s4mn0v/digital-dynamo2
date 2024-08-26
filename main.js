@@ -1,6 +1,18 @@
-const { app, BrowserWindow, ipcMain, Menu } = require('electron')
+ // 0------------------------------------------0
+// |  Authors:                                |
+// |                                          |
+// |  1. S4M-N0V                              |
+// |     Git: https://github.com/s4mn0v       |
+// |                                          |
+// |  2. JuanesB2f                            |
+// |     Git: https://github.com/JuanesB2f    |
+// |                                          |
+// |  3. DnovoaB                              |
+// |     Git: https://github.com/DnovoaB      |
+// 0------------------------------------------0
+
+const { app, BrowserWindow, ipcMain, Menu, session } = require('electron')
 const path = require('node:path')
-const { eventNames } = require('node:process')
 
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
@@ -12,21 +24,33 @@ const createWindow = () => {
         webPreferences: {
             contextIsolation: true,
             nodeIntegration: false,
-            // enableRemoteModule: false,
+            enableRemoteModule: false,
             webviewTag: true, // Habilita el uso de <webview>
-            devTools: true,
-            sandbox: false,
+            // devTools: true,
             preload: path.join(__dirname, 'preload.js'),
             // partition: 'persist:wordpress'
         }
     })
 
-    mainWindow.maximize();
+    // Configurar la Política de Seguridad de Contenido (CSP)
+    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+        callback({
+            responseHeaders: {
+                ...details.responseHeaders,
+                'Content-Security-Policy': [
+                    "default-src 'self'; " +
+                    "script-src 'self' 'unsafe-inline'; " +
+                    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+                    "font-src https://fonts.gstatic.com; " +
+                    "frame-src 'self' https://www.youtube.com; " +
+                    "img-src 'self' https://avatars.dicebear.com https://api.dicebear.com; " +
+                    "connect-src 'self' https://api-inference.huggingface.co;"
+                ]
+            }
+        });
+    });
 
     mainWindow.loadFile('./public/index.html')
-
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
 
     // IPC event handlers
     ipcMain.handle('minimize', () => {
