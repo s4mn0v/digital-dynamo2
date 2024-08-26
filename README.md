@@ -56,6 +56,7 @@ Nuestro visor web integrado te permitirá ver cómo se desarrolla tu sitio web e
 
 ---
 
+```
 flowchart TD
     A[Iniciar Sesión] --> B[Ver Menú Principal]
     B --> C[Seleccionar Módulo de Aprendizaje]
@@ -71,3 +72,4 @@ flowchart TD
     J -->|Sí| K[Felicidades! Has Completado el Curso]
     
     B --> L[Ocultar Panel Izquierdo] --> B
+```
