@@ -5,8 +5,8 @@
     |  1. S4M-N0V                              |
     |     Git: https://github.com/s4mn0v       |
     |                                          |
-    |  2. CodeMaster                           |
-    |     Git: https://github.com/codemaster   |
+    |  2. JuanesB2f                           |
+    |     Git: https://github.com/JuanesB2f   |
     |                                          |
     |  3. WebWizard                            |
     |     Git: https://github.com/webwizard    |
@@ -25,20 +25,32 @@
 </head>
 
 <body>
+    <!-- WINDOW CONTROLS -->
+    <div id="title-bar">
+        <span>Digital Dynamo 2</span>
+
+        <div>
+            <button id="minimize-btn"><img src="../assets/navbar/minimize.png" alt="" class="win-controls"></button>
+            <button id="maximize-btn"><img src="../assets/navbar/resize.png" alt="" class="win-controls"></button>
+            <button id="close-btn"><img src="../assets/navbar/close.png" alt="" class="win-controls"></button>
+        </div>
+    </div>
+    <!-- CONTENT -->
     <div class="container">
         <div class="sidebar">
             <nav id="navigation">
-                <img src="../assets/icons/dd-icon.png" alt="" height="70px">
+                <img src="../assets/icons/digital-dynamo-t.png" alt="" height="80px" class="left-icon">
                 <ul class="menu-items">
                     <li class="menu-item"><a href="#" id="home-link">Inicio</a></li>
                     <li class="menu-item"><a href="#" id="modules-link">Modulos</a></li>
-                    <li class="menu-item"><a href="#" id="chat-link">Chat</a></li>
                 </ul>
+                <img src="../assets/sidebar/hide.png" alt="" height="25px" id="hide-sidebar-btn" class="right-icon" title="Ocultar Panel">
             </nav>
-            <div class="content" id="content">
 
+            <div class="content" id="content">
             </div>
         </div>
+        <img src="../assets/sidebar/show.png" alt="" height="25px" id="show-sidebar-btn" style="display: none;" title="Mostrar Panel">
         <div class="content-2" id="content-2">
         </div>
     </div>

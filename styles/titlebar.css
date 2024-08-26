@@ -1,0 +1,41 @@
+#title-bar > span {
+    font-weight: 200;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#title-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--color-light-blackground);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    -webkit-user-select: none;
+    padding: 0 10px;
+    -webkit-app-region: drag;
+    border-bottom: 2px solid var(--color-orange);
+}
+
+#title-bar button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+
+#title-bar button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.win-controls {
+    width: 20px;
+    height: 20px;
+}

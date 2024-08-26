@@ -1,41 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulo #1</title>
-    <style>
-        .web-view {
-            width: 100%;
-            height: 500px;
-        }
-        webview {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <title>Módulo 14: Diseño Responsivo y Accesibilidad Web</title>
 </head>
+
 <body>
-    <h1>Modulo #14: Sacando el arroz</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusamus non, praesentium officia reiciendis
-        incidunt minima inventore dicta pariatur ea quae ut cupiditate consequatur, blanditiis reprehenderit doloribus,
-        illo animi omnis!</p>
-    <div class="web-view">
-        <webview id="myWebview" src="https://www.google.com"></webview>
-    </div>
-    <script nonce="RandomNonceHere">
-        const webview = document.getElementById('myWebview');
+    <h1>Módulo 14: Diseño Responsivo y Accesibilidad Web</h1>
 
-        webview.addEventListener('dom-ready', () => {
-            console.log('WebView cargado correctamente');
-        });
+    <h2>Diseño Responsivo</h2>
+    <p>El diseño responsivo es una manera de hacer que tu página web se vea bien en cualquier dispositivo, ya sea en un computador, una tableta o un celular. Imagina que tu página web es como un globo. Cuando lo inflas o desinflas, cambia de tamaño, pero siempre mantiene su forma. Lo mismo pasa con una página web responsiva: se ajusta automáticamente al tamaño de la pantalla en la que se está viendo.</p>
+    <p><b>¿Por qué es importante?</b> Porque hoy en día, muchas personas navegan por Internet desde sus teléfonos móviles. Si tu página web no se ve bien en un celular, podrías perder visitantes. Por eso, es fundamental asegurarse de que tu página web se adapte bien a cualquier pantalla, para que todos puedan navegar cómodamente sin importar el dispositivo que usen.</p>
 
-        function loadUrl(url) {
-            webview.src = url;
-        }
+    <h2>Accesibilidad Web</h2>
+    <p>La accesibilidad web se trata de hacer que tu página web sea fácil de usar para todas las personas, incluidas aquellas con discapacidades. Esto significa que cualquier persona, independientemente de sus habilidades, debería poder navegar y entender tu sitio web.</p>
+    <p>Por ejemplo, algunas personas tienen dificultades para ver. Para ayudar a estas personas, puedes:</p>
+    <ul>
+        <li>Asegurarte de que los textos en tu página web sean lo suficientemente grandes y de que haya un buen contraste de colores entre el texto y el fondo.</li>
+        <li>Agregar descripciones a las imágenes para que los lectores de pantalla (herramientas que leen en voz alta lo que aparece en la pantalla) puedan decirle a la persona qué hay en la imagen.</li>
+    </ul>
+    <p>Otro ejemplo son los videos. Si tienes videos en tu página, es útil agregar subtítulos para que las personas con problemas auditivos puedan entender lo que se dice.</p>
+    <p><b>¿Por qué es importante la accesibilidad?</b> Porque garantiza que tu página web esté abierta y disponible para todos, lo cual no solo es justo, sino también una buena práctica que puede aumentar el número de visitantes a tu sitio.</p>
 
-        // Si quieres cargar una URL diferente después
-        // loadUrl('https://www.example.com');
-    </script>
 </body>
+
 </html>
