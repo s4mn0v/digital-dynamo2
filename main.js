@@ -37,7 +37,7 @@ const createWindow = () => {
 
     mainWindow.maximize();
 
-    // mainWindow.openDevTools();
+    mainWindow.openDevTools();
 
     // Configurar la Política de Seguridad de Contenido (CSP)
     session.defaultSession.webRequest.onHeadersReceived((details, callback) => {

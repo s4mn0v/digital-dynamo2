@@ -46,100 +46,100 @@ const messages = [
 ];
 
 function init() {
-    welcomeScreen = document.getElementById("welcome-screen");
-    welcomeMessage = document.getElementById("welcome-message");
-  
-    // Ajustar el diseño de la pantalla de bienvenida
-    welcomeScreen.style.display = "flex";
-    welcomeScreen.style.flexDirection = "column";
-    welcomeScreen.style.justifyContent = "center";
-    welcomeScreen.style.alignItems = "center";
-    welcomeScreen.style.height = "100vh";
-    welcomeScreen.style.width = "100vw";
-    welcomeScreen.style.position = "fixed";
-    welcomeScreen.style.top = "0";
-    welcomeScreen.style.left = "0";
-    // Modificar estas líneas para aumentar aún más la transparencia
-    welcomeScreen.style.background = "linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.03) 100%)";
-    welcomeScreen.style.backdropFilter = "blur(1px)";
-    welcomeScreen.style.padding = "2vw";
-    welcomeScreen.style.boxSizing = "border-box";
-    welcomeScreen.style.zIndex = "1000";
-  
-    // Crear un contenedor para el avatar
-    const avatarContainer = document.createElement("div");
-    avatarContainer.id = "avatar-container";
-    avatarContainer.style.width = "80vw";
-    avatarContainer.style.maxWidth = "500px";
-    avatarContainer.style.height = "auto";
-    avatarContainer.style.aspectRatio = "1 / 1";
-    avatarContainer.style.position = "relative";
-    avatarContainer.style.display = "flex";
-    avatarContainer.style.justifyContent = "center";
-    avatarContainer.style.alignItems = "center";
-    avatarContainer.style.overflow = "hidden";
-    avatarContainer.style.zIndex = "20";
-    welcomeScreen.appendChild(avatarContainer);
-  
-    // Crear un contenedor para el mensaje de bienvenida
-    const messageContainer = document.createElement("div");
-    messageContainer.style.position = "relative";
-    messageContainer.style.width = "90%";
-    messageContainer.style.maxWidth = "800px";
-    messageContainer.style.padding = "2vw";
-    messageContainer.style.textAlign = "center";
-    messageContainer.style.zIndex = "30";
-    messageContainer.style.transition = "opacity 0.5s ease";
-    welcomeScreen.appendChild(messageContainer);
-  
-    // Ajustar el estilo del mensaje de bienvenida
-    welcomeMessage.style.color = "#FFFFFF";
-    welcomeMessage.style.fontSize = "clamp(24px, 4vw, 36px)";
-    welcomeMessage.style.fontWeight = "600";
-    welcomeMessage.style.lineHeight = "1.4";
-    welcomeMessage.style.textShadow = "2px 2px 4px rgba(0,0,0,0.7)";
-    welcomeMessage.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
-    welcomeMessage.style.margin = "0";
-    welcomeMessage.style.width = "100%";
-    welcomeMessage.style.backgroundColor = "rgba(0,0,0,0.3)";
-    welcomeMessage.style.borderRadius = "10px";
-    welcomeMessage.style.padding = "15px";
-    messageContainer.appendChild(welcomeMessage);
-  
-    // Inicializar el sintetizador de voz
-    speechSynthesis = window.speechSynthesis;
-    speechUtterance = new SpeechSynthesisUtterance();
-    
-    // Configurar la voz fija
-    setFixedVoice();
-  
-    // Crear el zorro 2D
-    createFox2D();
-  
-    // Crear y añadir el botón de omitir
-    createSkipButton();
-  
-    // Crear y añadir el botón de control de audio
-    createAudioControlButton();
-  
-    // Añadir el event listener de resize
-    window.addEventListener("resize", onWindowResize, false);
-  
-    showWelcomeMessages();
+  welcomeScreen = document.getElementById("welcome-screen");
+  welcomeMessage = document.getElementById("welcome-message");
+
+  // Ajustar el diseño de la pantalla de bienvenida
+  welcomeScreen.style.display = "flex";
+  welcomeScreen.style.flexDirection = "column";
+  welcomeScreen.style.justifyContent = "center";
+  welcomeScreen.style.alignItems = "center";
+  welcomeScreen.style.height = "100vh";
+  welcomeScreen.style.width = "100vw";
+  welcomeScreen.style.position = "fixed";
+  welcomeScreen.style.top = "0";
+  welcomeScreen.style.left = "0";
+  // Modificar estas líneas para aumentar aún más la transparencia
+  welcomeScreen.style.background = "linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.03) 100%)";
+  welcomeScreen.style.backdropFilter = "blur(1px)";
+  welcomeScreen.style.padding = "2vw";
+  welcomeScreen.style.boxSizing = "border-box";
+  welcomeScreen.style.zIndex = "1000";
+
+  // Crear un contenedor para el avatar
+  const avatarContainer = document.createElement("div");
+  avatarContainer.id = "avatar-container";
+  avatarContainer.style.width = "80vw";
+  avatarContainer.style.maxWidth = "500px";
+  avatarContainer.style.height = "auto";
+  avatarContainer.style.aspectRatio = "1 / 1";
+  avatarContainer.style.position = "relative";
+  avatarContainer.style.display = "flex";
+  avatarContainer.style.justifyContent = "center";
+  avatarContainer.style.alignItems = "center";
+  avatarContainer.style.overflow = "hidden";
+  avatarContainer.style.zIndex = "20";
+  welcomeScreen.appendChild(avatarContainer);
+
+  // Crear un contenedor para el mensaje de bienvenida
+  const messageContainer = document.createElement("div");
+  messageContainer.style.position = "relative";
+  messageContainer.style.width = "90%";
+  messageContainer.style.maxWidth = "800px";
+  messageContainer.style.padding = "2vw";
+  messageContainer.style.textAlign = "center";
+  messageContainer.style.zIndex = "30";
+  messageContainer.style.transition = "opacity 0.5s ease";
+  welcomeScreen.appendChild(messageContainer);
+
+  // Ajustar el estilo del mensaje de bienvenida
+  welcomeMessage.style.color = "#FFFFFF";
+  welcomeMessage.style.fontSize = "clamp(24px, 4vw, 36px)";
+  welcomeMessage.style.fontWeight = "600";
+  welcomeMessage.style.lineHeight = "1.4";
+  welcomeMessage.style.textShadow = "2px 2px 4px rgba(0,0,0,0.7)";
+  welcomeMessage.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+  welcomeMessage.style.margin = "0";
+  welcomeMessage.style.width = "100%";
+  welcomeMessage.style.backgroundColor = "rgba(0,0,0,0.3)";
+  welcomeMessage.style.borderRadius = "10px";
+  welcomeMessage.style.padding = "15px";
+  messageContainer.appendChild(welcomeMessage);
+
+  // Inicializar el sintetizador de voz
+  speechSynthesis = window.speechSynthesis;
+  speechUtterance = new SpeechSynthesisUtterance();
+
+  // Configurar la voz fija
+  setFixedVoice();
+
+  // Crear el zorro 2D
+  createFox2D();
+
+  // Crear y añadir el botón de omitir
+  createSkipButton();
+
+  // Crear y añadir el botón de control de audio
+  createAudioControlButton();
+
+  // Añadir el event listener de resize
+  window.addEventListener("resize", onWindowResize, false);
+
+  showWelcomeMessages();
 }
 function adjustWelcomeMessageStyle() {
-    welcomeMessage.style.color = "#FFFFFF";
-    welcomeMessage.style.fontSize = "clamp(24px, 4vw, 36px)";
-    welcomeMessage.style.fontWeight = "600";
-    welcomeMessage.style.lineHeight = "1.4";
-    welcomeMessage.style.textShadow = "2px 2px 4px rgba(0,0,0,0.5)";
-    welcomeMessage.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
-    welcomeMessage.style.margin = "0";
-    welcomeMessage.style.width = "100%";
-    welcomeMessage.style.textAlign = "center";
-    welcomeMessage.style.padding = "10px";
-    welcomeMessage.style.backgroundColor = "rgba(0,0,0,0.2)";
-    welcomeMessage.style.borderRadius = "10px";
+  welcomeMessage.style.color = "#FFFFFF";
+  welcomeMessage.style.fontSize = "clamp(24px, 4vw, 36px)";
+  welcomeMessage.style.fontWeight = "600";
+  welcomeMessage.style.lineHeight = "1.4";
+  welcomeMessage.style.textShadow = "2px 2px 4px rgba(0,0,0,0.5)";
+  welcomeMessage.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+  welcomeMessage.style.margin = "0";
+  welcomeMessage.style.width = "100%";
+  welcomeMessage.style.textAlign = "center";
+  welcomeMessage.style.padding = "10px";
+  welcomeMessage.style.backgroundColor = "rgba(0,0,0,0.2)";
+  welcomeMessage.style.borderRadius = "10px";
 }
 
 function setFixedVoice() {
@@ -258,61 +258,61 @@ function createFox2D() {
 }
 
 function createSkipButton() {
-    skipButton = document.createElement("button");
-    skipButton.textContent = "Omitir";
-    skipButton.style.position = "fixed";
-    skipButton.style.right = "2vw";
-    skipButton.style.bottom = "calc(17vh)";
-    skipButton.style.padding = "1vw 2vw";
-    skipButton.style.backgroundColor = "rgba(0, 174, 239, 0.8)";
-    skipButton.style.color = "white";
-    skipButton.style.border = "none";
-    skipButton.style.borderRadius = "30px";
-    skipButton.style.cursor = "pointer";
-    skipButton.style.fontSize = "clamp(14px, 2vw, 16px)";
-    skipButton.style.fontWeight = "bold";
-    skipButton.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.2)";
-    skipButton.style.transition = "all 0.3s ease";
-    skipButton.style.zIndex = "1001";
-    skipButton.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+  skipButton = document.createElement("button");
+  skipButton.textContent = "Omitir";
+  skipButton.style.position = "fixed";
+  skipButton.style.right = "2vw";
+  skipButton.style.bottom = "calc(17vh)";
+  skipButton.style.padding = "1vw 2vw";
+  skipButton.style.backgroundColor = "rgba(0, 174, 239, 0.8)";
+  skipButton.style.color = "white";
+  skipButton.style.border = "none";
+  skipButton.style.borderRadius = "30px";
+  skipButton.style.cursor = "pointer";
+  skipButton.style.fontSize = "clamp(14px, 2vw, 16px)";
+  skipButton.style.fontWeight = "bold";
+  skipButton.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.2)";
+  skipButton.style.transition = "all 0.3s ease";
+  skipButton.style.zIndex = "1001";
+  skipButton.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
 
-    skipButton.addEventListener("mouseover", function () {
-        this.style.backgroundColor = "rgba(0, 174, 239, 1)";
-        this.style.transform = "scale(1.05) translateY(-2px)";
-        this.style.boxShadow = "0 6px 16px rgba(0, 0, 0, 0.3)";
-    });
+  skipButton.addEventListener("mouseover", function () {
+    this.style.backgroundColor = "rgba(0, 174, 239, 1)";
+    this.style.transform = "scale(1.05) translateY(-2px)";
+    this.style.boxShadow = "0 6px 16px rgba(0, 0, 0, 0.3)";
+  });
 
-    skipButton.addEventListener("mouseout", function () {
-        this.style.backgroundColor = "rgba(0, 174, 239, 0.8)";
-        this.style.transform = "scale(1) translateY(0)";
-        this.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.2)";
-    });
+  skipButton.addEventListener("mouseout", function () {
+    this.style.backgroundColor = "rgba(0, 174, 239, 0.8)";
+    this.style.transform = "scale(1) translateY(0)";
+    this.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.2)";
+  });
 
-    skipButton.addEventListener("click", skipWelcome);
+  skipButton.addEventListener("click", skipWelcome);
 
-    welcomeScreen.appendChild(skipButton);
+  welcomeScreen.appendChild(skipButton);
 }
 
 function createAudioControlButton() {
-    const audioButton = document.createElement("button");
-    audioButton.id = "audio-control";
-    audioButton.innerHTML = "🔊"; // Emoji de altavoz
-    audioButton.style.position = "fixed";
-    audioButton.style.left = "2vw";
-    audioButton.style.bottom = "calc(17vh)";
-    audioButton.style.padding = "1vw";
-    audioButton.style.backgroundColor = "rgba(0, 174, 239, 0.8)";
-    audioButton.style.color = "white";
-    audioButton.style.border = "none";
-    audioButton.style.borderRadius = "50%";
-    audioButton.style.cursor = "pointer";
-    audioButton.style.fontSize = "clamp(20px, 3vw, 24px)";
-    audioButton.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.2)";
-    audioButton.style.transition = "all 0.3s ease";
-    audioButton.style.zIndex = "1001";
+  const audioButton = document.createElement("button");
+  audioButton.id = "audio-control";
+  audioButton.innerHTML = "🔊"; // Emoji de altavoz
+  audioButton.style.position = "fixed";
+  audioButton.style.left = "2vw";
+  audioButton.style.bottom = "calc(17vh)";
+  audioButton.style.padding = "1vw";
+  audioButton.style.backgroundColor = "rgba(0, 174, 239, 0.8)";
+  audioButton.style.color = "white";
+  audioButton.style.border = "none";
+  audioButton.style.borderRadius = "50%";
+  audioButton.style.cursor = "pointer";
+  audioButton.style.fontSize = "clamp(20px, 3vw, 24px)";
+  audioButton.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.2)";
+  audioButton.style.transition = "all 0.3s ease";
+  audioButton.style.zIndex = "1001";
 
-    audioButton.addEventListener("click", toggleAudio);
-    welcomeScreen.appendChild(audioButton);
+  audioButton.addEventListener("click", toggleAudio);
+  welcomeScreen.appendChild(audioButton);
 }
 
 function toggleAudio() {
@@ -411,9 +411,21 @@ function removeHighlight() {
   });
 }
 
+// function skipWelcome() {
+//   removeHighlight();
+//   speechSynthesis.cancel(); // Detener cualquier audio en reproducción
+//   playMagicSound();
+//   hideWelcomeScreen();
+// }
+
 function skipWelcome() {
   removeHighlight();
   speechSynthesis.cancel(); // Detener cualquier audio en reproducción
+  isSpeaking = false; // Asegurarse de que el estado de habla esté desactivado
+  const audioButton = document.getElementById("audio-control");
+  if (audioButton) {
+    audioButton.innerHTML = "🔇"; // Cambiar el icono del botón de audio
+  }
   playMagicSound();
   hideWelcomeScreen();
 }
@@ -471,10 +483,11 @@ window.addEventListener("beforeunload", cancelSpeech);
 
 // Función para reproducir el sonido mágico
 function playMagicSound() {
-  const audio = new Audio(
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/magic-spell-6005.mp3"
-  );
-  audio.play();
+  // const audio = new Audio(
+  //   "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/magic-spell-6005.mp3"
+  // );
+  // audio.play();
+  return
 }
 
 // Add keyframe animation for pulsating effect
