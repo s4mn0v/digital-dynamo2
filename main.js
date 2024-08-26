@@ -12,7 +12,9 @@
 // 0------------------------------------------0
 
 const { app, BrowserWindow, ipcMain, Menu, session } = require('electron')
-const path = require('node:path')
+const path = require('node:path');
+
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
 
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
@@ -23,14 +25,19 @@ const createWindow = () => {
         icon: path.join(__dirname, './assets/icons/dd-icon.png'),
         webPreferences: {
             contextIsolation: true,
-            nodeIntegration: false,
-            enableRemoteModule: false,
+            nodeIntegration: true,
+            enableRemoteModule: true,
+            sandbox: false,
             webviewTag: true, // Habilita el uso de <webview>
             // devTools: true,
             preload: path.join(__dirname, 'preload.js'),
             // partition: 'persist:wordpress'
         }
     })
+
+    mainWindow.maximize();
+
+    // mainWindow.openDevTools();
 
     // Configurar la Política de Seguridad de Contenido (CSP)
     session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
@@ -39,7 +46,7 @@ const createWindow = () => {
                 ...details.responseHeaders,
                 'Content-Security-Policy': [
                     "default-src 'self'; " +
-                    "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; " +
+                    "script-src 'self' 'unsafe-inline'; " +
                     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
                     "font-src https://fonts.gstatic.com; " +
                     "frame-src 'self' https://www.youtube.com; " +
