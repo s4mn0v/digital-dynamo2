@@ -1,7 +1,17 @@
-/* ----------------------------------*/
-/*|        Author: S4M-N0V          |*/
-/*| Git: https://github.com/s4mn0v  |*/
-/* ----------------------------------*/
+/* <!-- 
+    0------------------------------------------0
+    |  Authors:                                |
+    |                                          |
+    |  1. S4M-N0V                              |
+    |     Git: https://github.com/s4mn0v       |
+    |                                          |
+    |  2. JuanesB2f                            |
+    |     Git: https://github.com/JuanesB2f    |
+    |                                          |
+    |  3. DnovoaB                              |
+    |     Git: https://github.com/DnovoaB      |
+    0------------------------------------------0
+--> */
 
 .module-navigation-buttons {
     display: flex;
@@ -137,4 +147,41 @@
 
 .module-content {
     margin-top: 20px;
+}
+.img {
+    max-width: 80%; /* Adjust the percentage to your preference */
+    height: 400px; /* Adjust the height as needed */
+    position: relative; /* Added for relative positioning */
+    border-radius: 10px; /* Maintains previous styling */
+}
+.rounded-image {
+    width: 90%; /* Esto hará que la imagen ocupe el 100% del ancho de su contenedor */
+    height: auto; /* Esto mantiene la proporción de la imagen */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .image-container {
+    text-align: center;
+    max-width: 800px; /* Ajusta este valor según el ancho máximo deseado */
+    margin: 0 auto; /* Centra el contenedor en la página */
+  }
+  .video-container {
+    position: relative;
+    width: 100%;  /* O un ancho específico como 800px */
+    max-width: 100%;  /* Para asegurar que no exceda el ancho de su contenedor */
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    overflow: hidden;
+    margin: 0 auto;  /* Para centrar el contenedor si es necesario */
+}
+  
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 5%;  /* Añadido para centrar */
+    width: 90%;
+    height: 100%;
+    border: 2px solid #000;
+    border-radius: 10px;
 }

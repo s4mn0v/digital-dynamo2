@@ -29,7 +29,7 @@ const createWindow = () => {
             enableRemoteModule: true,
             sandbox: false,
             webviewTag: true, // Habilita el uso de <webview>
-            // devTools: true,
+            devTools: true,
             preload: path.join(__dirname, 'preload.js'),
             // partition: 'persist:wordpress'
         }
@@ -37,7 +37,7 @@ const createWindow = () => {
 
     mainWindow.maximize();
 
-    // mainWindow.openDevTools();
+    mainWindow.openDevTools();
 
     // Configurar la Política de Seguridad de Contenido (CSP)
     session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
@@ -45,13 +45,13 @@ const createWindow = () => {
             responseHeaders: {
                 ...details.responseHeaders,
                 'Content-Security-Policy': [
-                    "default-src 'self'; " +
-                    "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; " +
-                    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-                    "font-src https://fonts.gstatic.com; " +
-                    "frame-src 'self' https://www.youtube.com; " +
-                    "img-src 'self' https://avatars.dicebear.com https://api.dicebear.com; " +
-                    "connect-src 'self' https://api-inference.huggingface.co;"
+                    "default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; " +
+                    "script-src * 'unsafe-inline' 'unsafe-eval'; " +
+                    "style-src * 'unsafe-inline'; " +
+                    "font-src * data:; " +
+                    "frame-src *; " +
+                    "img-src * data: blob:; " +
+                    "connect-src *;"
                 ]
             }
         });
