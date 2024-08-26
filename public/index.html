@@ -27,26 +27,18 @@
       <span>Digital Dynamo 2</span>
 
       <div>
-        <button id="minimize-btn">
+        <button id="minimize-btn" aria-label="Minimizar">
           <img
             src="../assets/navbar/minimize.png"
-            alt="Minimizar"
+            alt=""
             class="win-controls"
           />
         </button>
-        <button id="maximize-btn">
-          <img
-            src="../assets/navbar/resize.png"
-            alt="Maximizar/Restaurar"
-            class="win-controls"
-          />
+        <button id="maximize-btn" aria-label="Maximizar/Restaurar">
+          <img src="../assets/navbar/resize.png" alt="" class="win-controls" />
         </button>
-        <button id="close-btn">
-          <img
-            src="../assets/navbar/close.png"
-            alt="Cerrar"
-            class="win-controls"
-          />
+        <button id="close-btn" aria-label="Cerrar">
+          <img src="../assets/navbar/close.png" alt="" class="win-controls" />
         </button>
       </div>
     </div>
@@ -64,50 +56,46 @@
             <li class="menu-item"><a href="#" id="home-link">Inicio</a></li>
             <li class="menu-item"><a href="#" id="modules-link">Módulos</a></li>
           </ul>
-          <img
-            src="../assets/sidebar/hide.png"
-            alt="Ocultar panel"
-            height="25"
+          <button
             id="hide-sidebar-btn"
             class="right-icon"
-            title="Ocultar Panel"
-          />
+            aria-label="Ocultar Panel"
+          >
+            <img
+              src="../assets/sidebar/hide.png"
+              alt=""
+              height="25"
+              title="Ocultar Panel"
+            />
+          </button>
         </nav>
 
         <div class="content" id="content"></div>
       </div>
-      <img
-        src="../assets/sidebar/show.png"
-        alt="Mostrar panel"
-        height="25"
+      <button
         id="show-sidebar-btn"
         style="display: none"
-        title="Mostrar Panel"
-      />
+        aria-label="Mostrar Panel"
+      >
+        <img
+          src="../assets/sidebar/show.png"
+          alt=""
+          height="25"
+          title="Mostrar Panel"
+        />
+      </button>
       <div class="content-2" id="content-2"></div>
     </div>
 
-    <!-- Avatar container -->
     <div id="avatar-container" class="avatar-container">
-      <div id="avatar-chat" class="avatar-chat">
+      <div id="avatar-chat" class="avatar-chat" style="display: none;">
         <div id="chat-messages" class="chat-messages"></div>
         <div class="chat-input">
-          <input
-            type="text"
-            id="user-input"
-            placeholder="Hazme una pregunta..."
-          />
+          <input type="text" id="user-input" placeholder="Escribe tu mensaje...">
           <button id="send-button">Enviar</button>
         </div>
       </div>
-      <div id="draggable-avatar" class="draggable-avatar">
-        <img
-          id="avatar-image"
-          src="https://api.dicebear.com/6.x/notionists/svg?seed=Rocky"
-          alt="Avatar"
-          class="avatar-image"
-        />
-      </div>
+      <img id="avatar-image" alt="Avatar" class="avatar-image">
     </div>
 
     <script src="../renderer.js"></script>
