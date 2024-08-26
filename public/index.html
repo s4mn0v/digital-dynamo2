@@ -1,4 +1,4 @@
-<!-- 
+<!--
     0------------------------------------------0
     |  Authors:                                |
     |                                          |
@@ -19,37 +19,45 @@
     <meta charset="UTF-8" />
     <title>Digital Dynamo</title>
     <link rel="stylesheet" href="../styles/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
   </head>
-
   <body>
-    <!-- WINDOW CONTROLS -->
-    <div id="title-bar">
-      <span>Digital Dynamo 2</span>
+    <!-- Pantalla de bienvenida -->
+    <div id="welcome-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background-color: #000;">
+      <div id="welcome-message" style="position: absolute; top: 20px; left: 20px; color: white; font-family: Arial, sans-serif; font-size: 24px;">
+        Bienvenido a Digital Dynamo
+      </div>
+    </div>
 
+    <!-- WINDOW CONTROLS -->
+    <header id="title-bar">
+      <h1>Digital Dynamo 2</h1>
       <div>
         <button id="minimize-btn" aria-label="Minimizar">
           <img
             src="../assets/navbar/minimize.png"
-            alt=""
+            alt="Minimizar"
             class="win-controls"
           />
         </button>
         <button id="maximize-btn" aria-label="Maximizar/Restaurar">
-          <img src="../assets/navbar/resize.png" alt="" class="win-controls" />
+          <img src="../assets/navbar/resize.png" alt="Maximizar/Restaurar" class="win-controls" />
         </button>
         <button id="close-btn" aria-label="Cerrar">
-          <img src="../assets/navbar/close.png" alt="" class="win-controls" />
+          <img src="../assets/navbar/close.png" alt="Cerrar" class="win-controls" />
         </button>
       </div>
-    </div>
+    </header>
     <!-- CONTENT -->
-    <div class="container">
+    <main class="container">
       <div class="sidebar">
         <nav id="navigation">
           <img
             src="../assets/icons/digital-dynamo-t.png"
             alt="Logo Digital Dynamo"
             height="80"
+            width="80"
             class="left-icon"
           />
           <ul class="menu-items">
@@ -63,13 +71,13 @@
           >
             <img
               src="../assets/sidebar/hide.png"
-              alt=""
+              alt="Ocultar Panel"
               height="25"
+              width="25"
               title="Ocultar Panel"
             />
           </button>
         </nav>
-
         <div class="content" id="content"></div>
       </div>
       <button
@@ -79,25 +87,27 @@
       >
         <img
           src="../assets/sidebar/show.png"
-          alt=""
+          alt="Mostrar Panel"
           height="25"
+          width="25"
           title="Mostrar Panel"
         />
       </button>
       <div class="content-2" id="content-2"></div>
-    </div>
-
+    </main>
     <div id="avatar-container" class="avatar-container">
       <div id="avatar-chat" class="avatar-chat" style="display: none;">
         <div id="chat-messages" class="chat-messages"></div>
         <div class="chat-input">
+          <label for="user-input" class="sr-only">Mensaje</label>
           <input type="text" id="user-input" placeholder="Escribe tu mensaje...">
           <button id="send-button">Enviar</button>
         </div>
       </div>
       <img id="avatar-image" alt="Avatar" class="avatar-image">
     </div>
-
     <script src="../renderer.js"></script>
+    <script src="../src/welcome.js"></script>
+    
   </body>
 </html>

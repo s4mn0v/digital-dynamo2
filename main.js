@@ -1,4 +1,4 @@
- // 0------------------------------------------0
+// 0------------------------------------------0
 // |  Authors:                                |
 // |                                          |
 // |  1. S4M-N0V                              |
@@ -39,7 +39,7 @@ const createWindow = () => {
                 ...details.responseHeaders,
                 'Content-Security-Policy': [
                     "default-src 'self'; " +
-                    "script-src 'self' 'unsafe-inline'; " +
+                    "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; " +
                     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
                     "font-src https://fonts.gstatic.com; " +
                     "frame-src 'self' https://www.youtube.com; " +
@@ -50,6 +50,7 @@ const createWindow = () => {
         });
     });
 
+    // Cargar la página principal directamente
     mainWindow.loadFile('./public/index.html')
 
     // IPC event handlers
@@ -70,8 +71,7 @@ const createWindow = () => {
     });
 
     ipcMain.handle('toggle-sidebar', () => {
-        const win = BrowserWindow.getFocusedWindow();
-        win.webContents.send('toggle-sidebar');
+        mainWindow.webContents.send('toggle-sidebar');
     });
 }
 
@@ -101,7 +101,6 @@ const createMenu = () => {
 
 app.whenReady().then(() => {
     createWindow()
-    // Custom Menu
     createMenu()
 
     app.on('activate', () => {
