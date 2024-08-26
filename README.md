@@ -1,4 +1,89 @@
-# Creación de Páginas Web y Marketing Digital para Gente No Programadora
+# Creación de páginas web y marketing
+
+## Descripción general
+
+Este programa educativo está diseñado para personas sin experiencia en programación que desean aprender a crear páginas web y desarrollar habilidades en marketing digital. La aplicación es multiplataforma y utiliza tecnologías modernas para proporcionar una experiencia de aprendizaje interactiva y eficiente.
+
+## Características principales
+
+1. Interfaz de usuario intuitiva
+2. Lecciones interactivas sobre HTML, CSS y JavaScript
+3. Módulos de marketing digital
+4. Chat de asistencia con avatar personalizado
+5. Compatibilidad multiplataforma
+
+## Tecnologías utilizadas
+
+- Electron.js: Framework para crear aplicaciones de escritorio multiplataforma
+- HTML: Lenguaje de marcado para estructurar el contenido
+- CSS: Lenguaje de estilos para el diseño visual
+- JavaScript: Lenguaje de programación para la interactividad
+
+## Instalación
+
+1. Ejecuta el instalador y sigue las instrucciones en pantalla.
+2. Una vez instalado, inicia la aplicación haciendo clic en el icono del programa.
+
+## Uso del programa
+
+### Navegación principal
+
+El programa se divide en las siguientes secciones principales:
+
+1. Introducción
+2. HTML básico
+3. CSS fundamentales
+4. JavaScript para principiantes
+5. Conceptos de marketing digital
+6. Proyectos prácticos
+
+Navega por estas secciones utilizando el menú lateral izquierdo.
+
+### Lecciones interactivas
+
+Cada lección incluye:
+
+- Explicaciones teóricas
+- Ejemplos prácticos
+- Ejercicios interactivos
+- Cuestionarios de autoevaluación
+
+### Chat de asistencia
+
+Para acceder al chat de asistencia:
+
+1. Haz clic en el icono de chat en la esquina inferior derecha.
+2. Escribe tu pregunta en el campo de texto.
+3. Presiona "Enviar" o la tecla "Enter".
+
+El avatar personalizado de DiceBear responderá a tus dudas de manera eficiente.
+
+## Requisitos del sistema
+
+- Windows 10 o superior
+- macOS 10.12 o superior
+- Linux (distribuciones principales)
+- 4 GB de RAM (mínimo)
+- 500 MB de espacio en disco
+
+## Soporte técnico
+
+Si encuentras algún problema o tienes preguntas adicionales:
+
+1. Consulta nuestra sección de Preguntas Frecuentes en la aplicación.
+2. Utiliza el chat de asistencia para problemas específicos.
+3. Envía un correo electrónico a soporte@creacionweb.com para problemas técnicos.
+
+## Actualizaciones
+
+El programa se actualiza automáticamente. Asegúrate de tener una conexión a Internet activa para recibir las últimas mejoras y correcciones.
+
+## Licencia
+
+Este software se distribuye bajo la licencia MIT. Consulta el archivo LICENSE.md para más detalles.
+
+# Creación de Páginas Web y Marketing Digital
+[Para gente no programadora]
 
 Este programa está diseñado para enseñarte a crear páginas web y aplicar estrategias de marketing digital, ¡sin necesidad de saber programar! A lo largo de 20 módulos, aprenderás desde los conceptos más básicos hasta técnicas avanzadas para impulsar tu presencia en línea.
 
