@@ -32,7 +32,7 @@ Nuestro visor web integrado te permitirá ver cómo se desarrolla tu sitio web e
 
 ---
 
-## Espacio para los demás Módulos
+## Módulos
 
 - Módulo #2: 
 - Módulo #3: 
