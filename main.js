@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Menu } = require('electron')
+const { app, BrowserWindow, ipcMain, Menu, session } = require('electron')
 const path = require('node:path')
 
 const createWindow = () => {
@@ -18,6 +18,24 @@ const createWindow = () => {
             // partition: 'persist:wordpress'
         }
     })
+
+    // Configurar la Política de Seguridad de Contenido (CSP)
+    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+        callback({
+            responseHeaders: {
+                ...details.responseHeaders,
+                'Content-Security-Policy': [
+                    "default-src 'self'; " +
+                    "script-src 'self' 'unsafe-inline'; " +
+                    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+                    "font-src https://fonts.gstatic.com; " +
+                    "frame-src 'self' https://www.youtube.com; " +
+                    "img-src 'self' https://avatars.dicebear.com https://api.dicebear.com; " +
+                    "connect-src 'self' https://api-inference.huggingface.co;"
+                ]
+            }
+        });
+    });
 
     mainWindow.loadFile('./public/index.html')
 
