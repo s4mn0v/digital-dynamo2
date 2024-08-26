@@ -468,6 +468,7 @@ function cancelSpeech() {
 // Añadir un listener para cancelar la síntesis de voz antes de que la página se cierre
 window.addEventListener("beforeunload", cancelSpeech);
 
+
 // Función para reproducir el sonido mágico
 function playMagicSound() {
   const audio = new Audio(
