@@ -21,7 +21,7 @@ function init() {
     welcomeScreen.style.position = 'fixed';
     welcomeScreen.style.top = '0';
     welcomeScreen.style.left = '0';
-    welcomeScreen.style.background = 'linear-gradient(135deg, rgba(0,174,239,0.1) 0%, rgba(0,174,239,0.4) 100%)';
+    welcomeScreen.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.9) 100%)';
     welcomeScreen.style.backdropFilter = 'blur(10px)';
     welcomeScreen.style.padding = '20px';
     welcomeScreen.style.boxSizing = 'border-box';
@@ -30,11 +30,11 @@ function init() {
     // Crear un contenedor para el avatar
     const avatarContainer = document.createElement('div');
     avatarContainer.id = 'avatar-container';
-    avatarContainer.style.width = '550px';
-    avatarContainer.style.height = '550px';
+    avatarContainer.style.width = '400px';
+    avatarContainer.style.height = '400px';
     avatarContainer.style.position = 'absolute';
-    avatarContainer.style.top = '40%';
-    avatarContainer.style.left = '50%';
+    avatarContainer.style.top = '25%';
+    avatarContainer.style.left = '40%';
     avatarContainer.style.transform = 'translate(-50%, -50%)';
     avatarContainer.style.zIndex = '20';
     welcomeScreen.appendChild(avatarContainer);
@@ -42,7 +42,7 @@ function init() {
     // Crear un contenedor para el mensaje de bienvenida
     const messageContainer = document.createElement('div');
     messageContainer.style.position = 'absolute';
-    messageContainer.style.bottom = '20%';
+    messageContainer.style.bottom = '17%';
     messageContainer.style.left = '50%';
     messageContainer.style.transform = 'translateX(-50%)';
     messageContainer.style.width = '90%';
@@ -53,14 +53,15 @@ function init() {
     welcomeScreen.appendChild(messageContainer);
 
     // Ajustar el estilo del mensaje de bienvenida
-    welcomeMessage.style.color = '#ffffff';
-    welcomeMessage.style.fontSize = 'clamp(40px, 5vw, 40px)';
+    welcomeMessage.style.color = '#333333';
+    welcomeMessage.style.fontSize = 'clamp(24px, 4vw, 32px)';
     welcomeMessage.style.textAlign = 'center';
     welcomeMessage.style.margin = '0';
     welcomeMessage.style.fontWeight = '600';
     welcomeMessage.style.lineHeight = '1.4';
-    welcomeMessage.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+    welcomeMessage.style.textShadow = '1px 1px 2px rgba(0,0,0,0.1)';
     welcomeMessage.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+    welcomeMessage.style.width = '100%';  // Asegura que el mensaje ocupe todo el ancho disponible
     messageContainer.appendChild(welcomeMessage);
 
     // Crear el zorro 2D
@@ -81,12 +82,12 @@ function createFox2D() {
     foxImage.onload = function() {
         const avatarContainer = document.getElementById('avatar-container');
         const canvas = document.createElement('canvas');
-        canvas.width = 550;
-        canvas.height = 550;
+        canvas.width = 800;
+        canvas.height = 800;
         avatarContainer.innerHTML = '';
         avatarContainer.appendChild(canvas);
 
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
         
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
@@ -94,64 +95,56 @@ function createFox2D() {
         const x = (canvas.width / 2) - (foxImage.width / 2) * scale;
         const y = (canvas.height / 2) - (foxImage.height / 2) * scale;
         
-        // Dibujar sombra
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-        ctx.shadowBlur = 20;
-        ctx.shadowOffsetX = 5;
-        ctx.shadowOffsetY = 5;
+        // Aplicar suavizado
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
         
         ctx.drawImage(foxImage, x, y, foxImage.width * scale, foxImage.height * scale);
-
-        // Resetear sombra
-        ctx.shadowColor = 'transparent';
-        ctx.shadowBlur = 0;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
 
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
         for (let i = 0; i < data.length; i += 4) {
-            if ((data[i] > 200 && data[i+1] > 100 && data[i+2] < 50) || 
-                (data[i] > 200 && data[i+1] > 200 && data[i+2] > 200)) {
+            // Hacer transparente solo el fondo blanco
+            if (data[i] > 250 && data[i+1] > 250 && data[i+2] > 250) {
                 data[i+3] = 0;
-            }
-            // Cambiar el color naranja por azul
-            if (data[i] > 200 && data[i+1] > 100 && data[i+2] < 50) {
-                data[i] = 0;    // R
-                data[i+1] = 174;  // G
-                data[i+2] = 239;  // B
             }
         }
         ctx.putImageData(imageData, 0, 0);
 
-        // Añadir brillo a los ojos
-        const eyeSize = 12;
-        const eyeX1 = canvas.width / 2 - 50;
-        const eyeX2 = canvas.width / 2 + 50;
-        const eyeY = canvas.height / 2 - 20;
+        // Añadir sombras suaves
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+        ctx.shadowBlur = 15;
+        ctx.shadowOffsetX = 5;
+        ctx.shadowOffsetY = 5;
+        ctx.drawImage(canvas, 0, 0);
 
-        ctx.fillStyle = 'white';
-        ctx.beginPath();
-        ctx.arc(eyeX1, eyeY, eyeSize, 0, Math.PI * 2);
-        ctx.arc(eyeX2, eyeY, eyeSize, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Añadir efecto de brillo general
-        ctx.globalCompositeOperation = 'lighter';
-        const gradient = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2);
-        gradient.addColorStop(0, 'rgba(255, 255, 255, 0.4)');
-        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Añadir detalles al pelaje
-        ctx.globalCompositeOperation = 'source-over';
-        for (let i = 0; i < 1000; i++) {
+        // Añadir detalles sutiles al pelaje
+        ctx.globalCompositeOperation = 'source-atop';
+        for (let i = 0; i < 15000; i++) {
             const px = Math.random() * canvas.width;
             const py = Math.random() * canvas.height;
-            ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.1})`;
+            ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.02})`;
             ctx.fillRect(px, py, 1, 1);
         }
+
+        // Mejorar el brillo de los ojos
+        const eyeSize = 15;
+        const eyeX1 = canvas.width / 2 - 75;
+        const eyeX2 = canvas.width / 2 + 75;
+        const eyeY = canvas.height / 2 - 30;
+
+        ctx.globalCompositeOperation = 'lighter';
+        const gradient = ctx.createRadialGradient(eyeX1, eyeY, 0, eyeX1, eyeY, eyeSize);
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(eyeX1, eyeY, eyeSize, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(eyeX2, eyeY, eyeSize, 0, Math.PI * 2);
+        ctx.fill();
     };
 }
 
@@ -167,7 +160,7 @@ function createSkipButton() {
     skipButton.style.border = 'none';
     skipButton.style.borderRadius = '30px';
     skipButton.style.cursor = 'pointer';
-    skipButton.style.fontSize = 'clamp(16px, 3vw, 18px)';
+    skipButton.style.fontSize = 'clamp(14px, 2vw, 16px)';
     skipButton.style.fontWeight = 'bold';
     skipButton.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
     skipButton.style.transition = 'all 0.3s ease';
@@ -230,14 +223,16 @@ function hideWelcomeScreen() {
 
 function onWindowResize() {
     const avatarContainer = document.getElementById('avatar-container');
-    const size = Math.min(window.innerWidth, window.innerHeight) * 0.5;
+    const size = Math.min(window.innerWidth, window.innerHeight) * 0.4;
     avatarContainer.style.width = `${size}px`;
     avatarContainer.style.height = `${size}px`;
 
     const canvas = avatarContainer.querySelector('canvas');
     if (canvas) {
-        canvas.width = size;
-        canvas.height = size;
+        canvas.width = size * 2;
+        canvas.height = size * 2;
+        canvas.style.width = `${size}px`;
+        canvas.style.height = `${size}px`;
         createFox2D();
     }
 }
