@@ -18,8 +18,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'nonce-RandomNonceHere'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' http: https: ws: wss: data: blob: 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; object-src 'self';">
     <title>Digital Dynamo</title>
     <link rel="stylesheet" href="../styles/style.css">
 </head>
@@ -44,13 +43,15 @@
                     <li class="menu-item"><a href="#" id="home-link">Inicio</a></li>
                     <li class="menu-item"><a href="#" id="modules-link">Modulos</a></li>
                 </ul>
-                <img src="../assets/sidebar/hide.png" alt="" height="25px" id="hide-sidebar-btn" class="right-icon" title="Ocultar Panel">
+                <img src="../assets/sidebar/hide.png" alt="" height="25px" id="hide-sidebar-btn" class="right-icon"
+                    title="Ocultar Panel">
             </nav>
 
             <div class="content" id="content">
             </div>
         </div>
-        <img src="../assets/sidebar/show.png" alt="" height="25px" id="show-sidebar-btn" style="display: none;" title="Mostrar Panel">
+        <img src="../assets/sidebar/show.png" alt="" height="25px" id="show-sidebar-btn" style="display: none;"
+            title="Mostrar Panel">
         <div class="content-2" id="content-2">
         </div>
     </div>

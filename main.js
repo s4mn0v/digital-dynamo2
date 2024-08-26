@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, Menu } = require('electron')
 const path = require('node:path')
+const { eventNames } = require('node:process')
 
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
@@ -11,18 +12,21 @@ const createWindow = () => {
         webPreferences: {
             contextIsolation: true,
             nodeIntegration: false,
-            enableRemoteModule: false,
+            // enableRemoteModule: false,
             webviewTag: true, // Habilita el uso de <webview>
             devTools: true,
+            sandbox: false,
             preload: path.join(__dirname, 'preload.js'),
             // partition: 'persist:wordpress'
         }
     })
 
+    mainWindow.maximize();
+
     mainWindow.loadFile('./public/index.html')
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
 
     // IPC event handlers
     ipcMain.handle('minimize', () => {
