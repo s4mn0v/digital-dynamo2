@@ -59,7 +59,6 @@ function init() {
   welcomeScreen.style.position = "fixed";
   welcomeScreen.style.top = "0";
   welcomeScreen.style.left = "0";
-  // Modificar estas líneas para aumentar aún más la transparencia
   welcomeScreen.style.background = "linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.03) 100%)";
   welcomeScreen.style.backdropFilter = "blur(1px)";
   welcomeScreen.style.padding = "2vw";
@@ -86,7 +85,7 @@ function init() {
   messageContainer.style.position = "relative";
   messageContainer.style.width = "90%";
   messageContainer.style.maxWidth = "800px";
-  messageContainer.style.padding = "2vw";
+  messageContainer.style.padding = "5vw";
   messageContainer.style.textAlign = "center";
   messageContainer.style.zIndex = "30";
   messageContainer.style.transition = "opacity 0.5s ease";
@@ -102,8 +101,7 @@ function init() {
   welcomeMessage.style.margin = "0";
   welcomeMessage.style.width = "100%";
   welcomeMessage.style.backgroundColor = "rgba(0,0,0,0.3)";
-  welcomeMessage.style.borderRadius = "10px";
-  welcomeMessage.style.padding = "15px";
+  welcomeMessage.style.borderRadius = "10px";  
   messageContainer.appendChild(welcomeMessage);
 
   // Inicializar el sintetizador de voz
@@ -113,7 +111,7 @@ function init() {
   // Configurar la voz fija
   setFixedVoice();
 
-  // Crear el zorro 2D
+  // Crear el zorro (ahora cargará el GIF)
   createFox2D();
 
   // Crear y añadir el botón de omitir
@@ -127,6 +125,7 @@ function init() {
 
   showWelcomeMessages();
 }
+
 function adjustWelcomeMessageStyle() {
   welcomeMessage.style.color = "#FFFFFF";
   welcomeMessage.style.fontSize = "clamp(24px, 4vw, 36px)";
@@ -169,91 +168,20 @@ function setFixedVoice() {
 
 function createFox2D() {
   const foxImage = new Image();
-  foxImage.src =
-    "../assets/fox.gif";
+  foxImage.src = "../assets/icons/fox.gif";
   foxImage.onload = function () {
     const avatarContainer = document.getElementById("avatar-container");
-    const canvas = document.createElement("canvas");
-    const size = Math.min(
-      avatarContainer.clientWidth,
-      avatarContainer.clientHeight
-    );
-    canvas.width = size * 2;
-    canvas.height = size * 2;
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
-    avatarContainer.innerHTML = "";
-    avatarContainer.appendChild(canvas);
+    avatarContainer.innerHTML = ""; // Limpiar el contenedor
 
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    // Crear un elemento de imagen para el GIF
+    const gifElement = document.createElement("img");
+    gifElement.src = foxImage.src;
+    gifElement.style.width = "100%";
+    gifElement.style.height = "100%";
+    gifElement.style.objectFit = "contain";
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const scale = Math.min(
-      canvas.width / foxImage.width,
-      canvas.height / foxImage.height
-    );
-    const x = canvas.width / 2 - (foxImage.width / 2) * scale;
-    const y = canvas.height / 2 - (foxImage.height / 2) * scale;
-
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = "high";
-
-    ctx.drawImage(
-      foxImage,
-      x,
-      y,
-      foxImage.width * scale,
-      foxImage.height * scale
-    );
-
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imageData.data;
-    for (let i = 0; i < data.length; i += 4) {
-      if (data[i] > 250 && data[i + 1] > 250 && data[i + 2] > 250) {
-        data[i + 3] = 0;
-      }
-    }
-    ctx.putImageData(imageData, 0, 0);
-
-    ctx.shadowColor = "rgba(0, 0, 0, 0.2)";
-    ctx.shadowBlur = 15 * scale;
-    ctx.shadowOffsetX = 5 * scale;
-    ctx.shadowOffsetY = 5 * scale;
-    ctx.drawImage(canvas, 0, 0);
-
-    ctx.globalCompositeOperation = "source-atop";
-    for (let i = 0; i < 15000; i++) {
-      const px = Math.random() * canvas.width;
-      const py = Math.random() * canvas.height;
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.02})`;
-      ctx.fillRect(px, py, 1, 1);
-    }
-
-    const eyeSize = 15 * scale;
-    const eyeX1 = canvas.width / 2 - 75 * scale;
-    const eyeX2 = canvas.width / 2 + 75 * scale;
-    const eyeY = canvas.height / 2 - 30 * scale;
-
-    ctx.globalCompositeOperation = "lighter";
-    const gradient = ctx.createRadialGradient(
-      eyeX1,
-      eyeY,
-      0,
-      eyeX1,
-      eyeY,
-      eyeSize
-    );
-    gradient.addColorStop(0, "rgba(255, 255, 255, 0.8)");
-    gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
-    ctx.fillStyle = gradient;
-    ctx.beginPath();
-    ctx.arc(eyeX1, eyeY, eyeSize, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.arc(eyeX2, eyeY, eyeSize, 0, Math.PI * 2);
-    ctx.fill();
+    // Añadir el GIF al contenedor
+    avatarContainer.appendChild(gifElement);
   };
 }
 
@@ -411,13 +339,6 @@ function removeHighlight() {
   });
 }
 
-// function skipWelcome() {
-//   removeHighlight();
-//   speechSynthesis.cancel(); // Detener cualquier audio en reproducción
-//   playMagicSound();
-//   hideWelcomeScreen();
-// }
-
 function skipWelcome() {
   removeHighlight();
   speechSynthesis.cancel(); // Detener cualquier audio en reproducción
@@ -480,14 +401,9 @@ function cancelSpeech() {
 // Añadir un listener para cancelar la síntesis de voz antes de que la página se cierre
 window.addEventListener("beforeunload", cancelSpeech);
 
-
 // Función para reproducir el sonido mágico
 function playMagicSound() {
-  // const audio = new Audio(
-  //   "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/magic-spell-6005.mp3"
-  // );
-  // audio.play();
-  return
+  return;
 }
 
 // Add keyframe animation for pulsating effect
