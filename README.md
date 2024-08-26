@@ -56,7 +56,7 @@ Nuestro visor web integrado te permitirá ver cómo se desarrolla tu sitio web e
 
 ---
 
-```
+```mermaid
 flowchart TD
     A[Iniciar Sesión] --> B[Ver Menú Principal]
     B --> C[Seleccionar Módulo de Aprendizaje]
