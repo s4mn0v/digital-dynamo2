@@ -40,37 +40,7 @@ function init() {
     welcomeMessage.style.zIndex = '10';
 
     // Crear y añadir el botón de omitir
-    skipButton = document.createElement('button');
-    skipButton.textContent = 'Omitir';
-    skipButton.style.position = 'absolute';
-    skipButton.style.top = '10px';
-    skipButton.style.right = '10px';
-    skipButton.style.padding = '70px 16px';
-    skipButton.style.backgroundColor = 'rgba(76, 175, 80, 0.8)';
-    skipButton.style.color = 'white';
-    skipButton.style.border = 'none';
-    skipButton.style.borderRadius = '20px';
-    skipButton.style.cursor = 'pointer';
-    skipButton.style.zIndex = '1000';
-    skipButton.style.fontFamily = 'Arial, sans-serif';
-    skipButton.style.fontSize = '14px';
-    skipButton.style.fontWeight = 'bold';
-    skipButton.style.textTransform = 'uppercase';
-    skipButton.style.letterSpacing = '1px';
-    skipButton.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.2)';
-    skipButton.style.transition = 'all 0.3s ease';
-    skipButton.addEventListener('mouseover', function() {
-        this.style.backgroundColor = 'rgba(76, 175, 80, 1)';
-        this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.3)';
-        this.style.transform = 'translateY(-2px)';
-    });
-    skipButton.addEventListener('mouseout', function() {
-        this.style.backgroundColor = 'rgba(76, 175, 80, 0.8)';
-        this.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.2)';
-        this.style.transform = 'translateY(0)';
-    });
-    skipButton.addEventListener('click', skipWelcome);
-    welcomeScreen.appendChild(skipButton);
+    createSkipButton();
 
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -106,6 +76,39 @@ function init() {
 
     animate();
     showWelcomeMessages();
+}
+
+function createSkipButton() {
+    skipButton = document.createElement('button');
+    skipButton.textContent = 'Omitir';
+    skipButton.style.position = 'fixed';
+    skipButton.style.right = '2rem';
+    skipButton.style.top = 'calc(2rem + 20px)'; // Bajado 20 píxeles más
+    skipButton.style.padding = '10px 20px';
+    skipButton.style.backgroundColor = 'rgba(76, 175, 80, 0.8)';
+    skipButton.style.color = 'white';
+    skipButton.style.border = 'none';
+    skipButton.style.borderRadius = '20px';
+    skipButton.style.cursor = 'pointer';
+    skipButton.style.fontSize = '16px';
+    skipButton.style.fontWeight = 'bold';
+    skipButton.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+    skipButton.style.transition = 'all 0.3s ease';
+    skipButton.style.zIndex = '1000';
+
+    skipButton.addEventListener('mouseover', function() {
+        this.style.backgroundColor = 'rgba(76, 175, 80, 1)';
+        this.style.transform = 'scale(1.05)';
+    });
+
+    skipButton.addEventListener('mouseout', function() {
+        this.style.backgroundColor = 'rgba(76, 175, 80, 0.8)';
+        this.style.transform = 'scale(1)';
+    });
+
+    skipButton.addEventListener('click', skipWelcome);
+    
+    welcomeScreen.appendChild(skipButton);
 }
 
 function animate() {
@@ -145,6 +148,9 @@ function hideWelcomeScreen() {
     welcomeScreen.style.opacity = 0;
     setTimeout(() => {
         welcomeScreen.style.display = 'none';
+        if (skipButton) {
+            skipButton.remove();
+        }
     }, 1000);
 }
 
